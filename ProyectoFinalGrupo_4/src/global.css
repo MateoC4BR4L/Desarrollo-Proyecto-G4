@@ -1,4 +1,19 @@
 :root {
+  --primary-light-green: #5FE19B;
+  --primary-super-green: #4CC986;
+  --secondary-cool-iris: #5F81FB;
+  --secondary-lapis-lazuli: #1245C9;
+  --secondary-deep-blue: #06207B;
+  --secondary-coral-reef: #FB5F5F;
+  --secondary-hey-honey: #FFDC22;
+  --neutrals-black: #151515;
+  --neutrals-dark-gray: #303030;
+  --neutrals-medium-gray: #515151;
+  --neutrals-light-gray: #939393;
+  --neutrals-white: #FFFFFF;
+}
+
+/*:root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -65,4 +80,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+}*/
