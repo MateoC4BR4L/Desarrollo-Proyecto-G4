@@ -1,0 +1,55 @@
+.cardContainer{
+    display: flex;
+    flex-direction: column;
+    border: solid 5px;
+    width: fit-content;
+    height: fit-content;
+}
+.cardInnerTitleContainerSmall{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.cardInnerInfoContainerSmall{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.cardInnerInfoContainerTextSmall{
+    display: flex;
+    flex-direction: column;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    /* esto tiene que estar alineado a la izquierda y release date y genre tienen que estar alineados*/
+}
+
+.cardInnerInfoContainerIconsSmall{
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: 2vw;
+    /* esto tiene que estar alineado a la derecha*/
+}
+.cardInnerTitleContainerBig{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+.cardInnerInfoContainerTextBig{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 2vw;
+    margin-right: 2vw;
+}
+.icons{
+    margin-left: auto;
+}
+.cardGameDisplay{
+    width: 350px;
+    align-self: center;
+    border: solid 2px;
+    /* esto tiene que estar "estirado" */
+}
