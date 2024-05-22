@@ -13,6 +13,186 @@
   --neutrals-white: #FFFFFF;
 }
 
+/*Dark mode*/
+
+.exo-dark-mode-h1 {
+  font-family: "Exo", sans-serif;
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 63.79px;
+  color: white; 
+}
+
+.exo-dark-mode-h2 {
+  font-family: "Exo", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 42.53px;
+  color: white; 
+}
+
+.exo-dark-mode-h3 {
+  font-family: "Exo", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26.58px;
+  color: white; 
+}
+
+.exo-dark-mode-h3-link {
+  font-family: "Exo", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26.58px;
+  color: #5FE19B; 
+}
+
+.exo-dark-mode-h4 {
+  font-family: "Exo", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23.92px;
+  color: white; 
+}
+
+.exo-dark-mode-h5 {
+  font-family: "Exo", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21.26px;
+  color: white; 
+}
+
+.exo-dark-mode-h5-underline {
+  font-family: "Exo", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21.26px;
+  color: white; 
+}
+
+.exo-dark-mode-h5-light-gray {
+  font-family: "Exo", sans-serif;
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 63.79px;
+  color: #939393;
+}
+
+.exo-dark-mode-h6 {
+  font-family: "Exo", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18.61px;
+  color: white; 
+}
+
+.exo-dark-mode-h6-light-gray {
+  font-family: "Exo", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18.61px;
+  color: #939393;
+}
+
+.exo-dark-mode-h6-link {
+  font-family: "Exo", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18.61px;
+  color: #5FE19B; 
+}
+
+/*Light mode*/
+
+.exo-light-mode-h1 {
+  font-family: "Exo", sans-serif;
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 63.79px;
+  color: #515151; 
+}
+
+.exo-light-mode-h2 {
+  font-family: "Exo", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 42.53px;
+  color: #515151; 
+}
+
+.exo-light-mode-h3 {
+  font-family: "Exo", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26.58px;
+  color: #515151; 
+}
+
+.exo-light-mode-h3-link {
+  font-family: "Exo", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26.58px;
+  color: #4CC986; 
+}
+
+.exo-light-mode-h4 {
+  font-family: "Exo", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23.92px;
+  color: #515151; 
+}
+
+.exo-light-mode-h5 {
+  font-family: "Exo", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21.26px;
+  color: #515151; 
+}
+
+.exo-light-mode-h5-underline {
+  font-family: "Exo", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21.26px;
+  color: #515151; 
+}
+
+.exo-light-mode-h5-light-gray {
+  font-family: "Exo", sans-serif;
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 63.79px;
+  color: #939393;
+}
+
+.exo-light-mode-h6 {
+  font-family: "Exo", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18.61px;
+  color: #515151; 
+}
+
+.exo-light-mode-h6-light-gray {
+  font-family: "Exo", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18.61px;
+  color: #939393;
+}
+
+.exo-light-mode-h6-link {
+  font-family: "Exo", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18.61px;
+  color: #4CC986; 
+}
+
 /*:root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
