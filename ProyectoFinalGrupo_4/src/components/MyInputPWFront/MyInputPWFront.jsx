@@ -6,6 +6,7 @@ function MyInputsPWFront(){
         </div>
     );
 }
+export default MyInputsPWFront;
 
 // ESTO ES UNA ESTRUCTURA GPT PARA VER Y NO VER LA CONTRASEÑA INGRESADA PORQUE LA DE ARRIBA, NO PERMITE VER LA CONTRASEÑA.
 
