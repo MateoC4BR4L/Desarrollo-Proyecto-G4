@@ -53,4 +53,4 @@ function MyCard({ size }){
         {/* diseñar la card grande */}
     }
 }
-export default MyCard
+export default MyCard;

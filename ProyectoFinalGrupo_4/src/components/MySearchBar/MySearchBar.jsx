@@ -6,3 +6,4 @@ function MySearchBar(){
         </div>
     );
 }
+export default MySearchBar;
