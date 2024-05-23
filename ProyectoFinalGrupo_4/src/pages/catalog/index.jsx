@@ -2,13 +2,15 @@ import React from "react";
 import MyCard from "../../components/MyCard";
 import MySearchBar from "../../components/MySearchBar/MySearchBar";
 import MyButton from "../../components/MyButton/MyButton";
+import "./index.css"
+import GameFinderLogo from "../../assets/GAMEFINDER.svg"
 
 function Catalog() {
     return (
         <div id="catalogWrapper">
             <div id="catalogMenuWrapper">
-                <img id="gameFinderLogo"/> {/* gamefinder logo */}
-                <MySearchBar />
+                <img id="gameFinderLogo" src={GameFinderLogo}/>x
+                <MySearchBar id="searchBar" />
                 <MyButton title="Log In"/>
                 {/* avatar */}
             </div>
@@ -39,6 +41,12 @@ function Catalog() {
                     <h3>Popular</h3>
                     <MyButton title="*logo* Last searches" />
                     <MyButton title="*logo* Best of the year" />
+                </div>
+                <div id="catalogBodyLowerContent">
+                    <MyCard size={"small"} />
+                    <MyCard size={"small"} />
+                    <MyCard size={"small"} />
+                    <MyCard size={"small"} />
                 </div>
             </div>
         </div>

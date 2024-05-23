@@ -1,7 +1,7 @@
 import App from "../../App";
-function MySearchBar(){
+function MySearchBar({ id }){
     return(
-        <div className="SearchBar">
+        <div className="SearchBar" id={id}>
             <input placeholder="Search"></input>
         </div>
     );
