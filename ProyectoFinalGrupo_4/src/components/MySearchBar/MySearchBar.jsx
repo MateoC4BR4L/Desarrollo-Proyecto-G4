@@ -6,8 +6,4 @@ function MySearchBar({ id }){
         </div>
     );
 }
-<<<<<<< HEAD
-export default MySearchBar
-=======
 export default MySearchBar;
->>>>>>> main

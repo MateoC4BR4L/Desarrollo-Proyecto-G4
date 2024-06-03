@@ -4,43 +4,51 @@ import MySearchBar from "../../components/MySearchBar/MySearchBar";
 import MyButton from "../../components/MyButton/MyButton";
 import "./index.css"
 import GameFinderLogo from "../../assets/GAMEFINDER.svg"
+import Display1 from "../../assets/ThumbnailsActive.svg"
+import Display2 from "../../assets/Disabled.svg"
+import StarIcon from "../../assets/Star.svg"
+import CalendarIcon from "../../assets/Calendar.svg"
+import ClockIcon from "../../assets/Clock.svg"
+import SearchIcon from "../../assets/Search.svg"
+import ThumbsUpIcon from "../../assets/Thumbs Up.svg"
+
 
 function Catalog() {
     return (
         <div id="catalogWrapper">
             <div id="catalogMenuWrapper">
-                <img id="gameFinderLogo" src={GameFinderLogo}/>x
+                <img id="gameFinderLogo" src={GameFinderLogo}/>
                 <MySearchBar id="searchBar" />
                 <MyButton title="Log In"/>
                 {/* avatar */}
             </div>
             <div id="catalogBodyUpper">
                 <div id="catalogBodyUpperLeft">
-                    <h1>New and trending</h1>
-                    <p>Based on player counts and release date</p>
+                    <h1 id="titleLarge">New and trending</h1>
+                    <p id="titleSmall">Based on player counts and release date</p>
                 </div>
                 <div id="catalogBodyUpperRight">
                     <div id="darkModeContainer">
-                        <p>Dark mode</p>
+                        <p>Dark mode *switch*</p>
                         {/* switch */}
                     </div>
                     <div id="catalogBodyDisplayButtons">
-                        <MyButton title="option 1" />
-                        <MyButton title="option 2" />
+                        <MyButton icon={Display1} />
+                        <MyButton icon={Display2} />
                     </div>
                 </div>
             </div>
             <div id="catalogBodyLower">
                 <div id="catalogBodyLowerMenu">
-                    <MyButton title="Home" />
-                    <MyButton title="Reviews" />
-                    <h3>New Releases</h3> 
-                    <MyButton title="*logo* This week" />
-                    <MyButton title="*logo* This month" />
-                    <MyButton title="*logo* Coming soon" />
-                    <h3>Popular</h3>
-                    <MyButton title="*logo* Last searches" />
-                    <MyButton title="*logo* Best of the year" />
+                    <MyButton title="Home" className="bodyMenuTitle" />
+                    <MyButton title="Reviews" className="bodyMenuTitle" />
+                    <h3 className="bodyMenuTitle">New Releases</h3> 
+                    <MyButton icon={StarIcon} title="This week" className="bodyMenuOptions" />
+                    <MyButton icon={CalendarIcon} title="This month" className="bodyMenuOptions" />
+                    <MyButton icon={ClockIcon} title="Coming soon" className="bodyMenuOptions" />
+                    <h3 id="popularMenuTitle">Popular</h3>
+                    <MyButton icon={SearchIcon} title="Last searches" className="bodyMenuOptions" />
+                    <MyButton icon={ThumbsUpIcon} title="Best of the year" className="bodyMenuOptions" />
                 </div>
                 <div id="catalogBodyLowerContent">
                     <MyCard size={"small"} />
