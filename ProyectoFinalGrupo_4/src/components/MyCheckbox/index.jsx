@@ -6,4 +6,4 @@ function MyCheckbox( {text} ) {
             <input type="checkbox" name={text} value={text}/> {text} 
     </div>)
 }
-export default MyCheckbox
+export default MyCheckbox;
