@@ -3,7 +3,7 @@ import MyCard from "../../components/MyCard";
 import MySearchBar from "../../components/MySearchBar/MySearchBar";
 import MyButton from "../../components/MyButton/MyButton";
 import "./index.css"
-import GameFinderLogo from "../../assets/GAMEFINDER.svg"
+import GameFinderLogo from "../../assets/White.svg"
 import Display1 from "../../assets/ThumbnailsActive.svg"
 import Display2 from "../../assets/Disabled.svg"
 import StarIcon from "../../assets/Star.svg"

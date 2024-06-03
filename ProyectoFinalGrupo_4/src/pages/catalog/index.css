@@ -1,76 +1,108 @@
-#catalogMenuWrapper{
+/* Ensure the body takes up the full viewport */
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#catalogWrapper {
+    background: #151515;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure it takes the full viewport height */
+}
+
+#catalogMenuWrapper {
     display: flex;
     flex-direction: row;
-    margin-top: auto;
+    background: linear-gradient(180deg, #5FE19B 0%, #36B972 50%, #0EA152 100%);
+    box-shadow: 1px -3px 36px 0px #00000080;
+    padding: 10px;
 }
-#searchBar{
+
+#searchBar {
     margin-left: auto;
     margin-right: auto;
     width: 362px;
     height: 47px;
-    top: 23px;
-    left: 539px;
-    gap: 0px;
     opacity: 0px;
-    
 }
-#catalogBodyUpper{
+
+#catalogBodyUpper {
     display: flex;
     justify-content: space-between;
+    padding: 20px;
+    flex-shrink: 0;
 }
-#catalogBodyLower{
+
+#catalogBodyLower {
     display: flex;
-    flex-direction: row;
+    flex: 1;
+    overflow: hidden;
 }
-#catalogBodyLowerMenu{
-    margin-right: auto;
+
+#catalogBodyLowerMenu {
     display: flex;
     flex-direction: column;
-    position: fixed;
+    width: 200px;
+    position: sticky;
+    top: 0;
+    height: 100%;
+    background: #151515; /* Ensure background color matches */
+    padding: 20px;
+    flex-shrink: 0;
 }
-#catalogBodyLowerContent{
+
+#catalogBodyLowerContent {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1%;
-    margin-left: 20%;
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto; /* Allow vertical scrolling if content overflows */
+    margin-right: -20px; /* Offset padding to prevent horizontal scroll */
 }
-#gameFinderLogo{
+
+#gameFinderLogo {
     width: 293px;
     height: 60px;
-    top: 16px;
-    left: 27px;
-    gap: 0px;
     opacity: 0px;
 }
-#titleLarge{
+
+#titleLarge {
     font-family: Exo;
     font-size: 48px;
     font-weight: 800;
     line-height: 63.79px;
     text-align: left;
 }
-#titleSmall{
+
+#titleSmall {
     font-family: Exo;
     font-size: 18px;
     font-weight: 400;
     line-height: 23.92px;
     text-align: left;
 }
-.bodyMenuTitle{
+
+.bodyMenuTitle {
     font-family: Exo;
     font-size: 20px;
     font-weight: 700;
     line-height: 26.58px;
     text-align: left;
 }
-.bodyMenuOptions{
+
+.bodyMenuOptions {
     font-family: Exo;
     font-size: 18px;
     font-weight: 400;
     line-height: 23.92px;
     text-align: left;
 }
-#popularMenuTitle{
+
+#popularMenuTitle {
     font-family: Exo;
     font-size: 22px;
     font-weight: 700;
