@@ -14,7 +14,7 @@ import ThumbsUpIcon from "../../assets/Thumbs Up.svg"
 
 
 function Catalog() {
-    function hola(){}
+    function hola(){alert("Hola")}
     return (
         <div id="catalogWrapper">
             <div id="catalogMenuWrapper">
@@ -41,13 +41,13 @@ function Catalog() {
             </div>
             <div id="catalogBodyLower">
                 <div id="catalogBodyLowerMenu">
-                    <MyButton title="Home" className="bodyMenuTitle" onClick={hola}/>
+                    <MyButton title="Home" className="bodyMenuTitle" />
                     <MyButton title="Reviews" className="bodyMenuTitle" />
-                    <h3 className="bodyMenuTitle">New Releases</h3> 
+                    <h3 className="catalogBodyLowerMenuTitle">New Releases</h3> 
                     <MyButton icon={StarIcon} title="This week" className="bodyMenuOptions" />
                     <MyButton icon={CalendarIcon} title="This month" className="bodyMenuOptions" />
                     <MyButton icon={ClockIcon} title="Coming soon" className="bodyMenuOptions" />
-                    <h3 id="popularMenuTitle">Popular</h3>
+                    <h3 className="catalogBodyLowerMenuTitle">Popular</h3>
                     <MyButton icon={SearchIcon} title="Last searches" className="bodyMenuOptions" />
                     <MyButton icon={ThumbsUpIcon} title="Best of the year" className="bodyMenuOptions" />
                 </div>

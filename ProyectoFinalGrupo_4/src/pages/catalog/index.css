@@ -48,6 +48,7 @@
     background: #151515; /* Ensure background color matches */
     padding: 20px;
     flex-shrink: 0;
+    justify-content: flex-start;
 }
 
 #catalogBodyLowerContent {
@@ -96,12 +97,15 @@
     font-weight: 400;
     line-height: 23.92px;
     text-align: left;
+    justify-content: flex-start;
 }
 
-#popularMenuTitle {
+.catalogBodyLowerMenuTitle{
     font-family: Exo;
     font-size: 22px;
     font-weight: 700;
     line-height: 29.24px;
     text-align: left;
+    justify-content: flex-start;
+    padding-left: 7%;
 }

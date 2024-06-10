@@ -13,4 +13,11 @@
     background: #151515;
     color: #FFFFFF;
     border: none;
+    justify-content: flex-start;
+}
+.bodyMenuTitle{
+    background: #151515;
+    color: #FFFFFF;
+    border: none;
+    justify-content: flex-start;
 }
