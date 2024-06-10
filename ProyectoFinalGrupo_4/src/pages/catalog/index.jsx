@@ -14,6 +14,7 @@ import ThumbsUpIcon from "../../assets/Thumbs Up.svg"
 
 
 function Catalog() {
+    function hola(){}
     return (
         <div id="catalogWrapper">
             <div id="catalogMenuWrapper">
@@ -40,7 +41,7 @@ function Catalog() {
             </div>
             <div id="catalogBodyLower">
                 <div id="catalogBodyLowerMenu">
-                    <MyButton title="Home" className="bodyMenuTitle" />
+                    <MyButton title="Home" className="bodyMenuTitle" onClick={hola}/>
                     <MyButton title="Reviews" className="bodyMenuTitle" />
                     <h3 className="bodyMenuTitle">New Releases</h3> 
                     <MyButton icon={StarIcon} title="This week" className="bodyMenuOptions" />

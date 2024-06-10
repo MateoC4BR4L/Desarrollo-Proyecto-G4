@@ -1,16 +1,12 @@
-/* Ensure the body takes up the full viewport */
-body, html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
+
 
 #catalogWrapper {
     background: #151515;
     color: #FFFFFF;
     display: flex;
     flex-direction: column;
-    height: 100%; /* Ensure it takes the full viewport height */
+    height: 100vh; /* Ensure it takes the full viewport height */
+    width: 100vw;
 }
 
 #catalogMenuWrapper {
