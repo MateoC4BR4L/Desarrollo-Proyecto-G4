@@ -1,9 +1,11 @@
 .cardContainer{
     display: flex;
     flex-direction: column;
-    border: solid 5px;
-    width: fit-content;
-    height: fit-content;
+    width: 363px;
+    height: 314px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: #303030;
 }
 .cardInnerTitleContainerSmall{
     display: flex;
@@ -48,8 +50,32 @@
     margin-left: auto;
 }
 .cardGameDisplay{
-    width: 350px;
-    align-self: center;
-    border: solid 2px;
+    width: 363px;
+    height: 179px;
+    flex-shrink: 0;
+    border-radius: 12px;
     /* esto tiene que estar "estirado" */
+}
+.cardGameTitle{
+    width: 293px;
+    height: 33px;
+    flex-shrink: 0;
+    color: #FFF;
+    font-family: Exo;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.cardGameNumber{
+    width: 40px;
+    height: 20px;
+    flex-shrink: 0;
+    color: #36B972;
+    text-align: right;
+    font-family: Exo;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }

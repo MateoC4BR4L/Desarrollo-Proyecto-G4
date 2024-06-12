@@ -11,7 +11,7 @@ function MyCard({ size }){
             <img className="cardGameDisplay" src={displayPhoto} /> {/* esta info tiene que ser aportada por la api */}
             <div className="cardInnerTitleContainerSmall">
                 <h1 className="cardGameTitle">Game's name over here...</h1>
-                <h1>#1</h1>
+                <h1 className="cardGameNumber">#1</h1>
                 {/* esta info tiene que ser aportada por la api  
                     falta el corazoncito en la imagen para darle favorite*/}
             </div>

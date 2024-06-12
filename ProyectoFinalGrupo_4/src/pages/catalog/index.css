@@ -55,11 +55,11 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1%;
-    padding: 20px;
+    padding: 20px 20px 80px 20px;
     flex: 1;
-    overflow-y: auto; /* Allow vertical scrolling if content overflows */
-    margin-right: -20px; /* Offset padding to prevent horizontal scroll */
-}
+    overflow-y: auto;
+    margin-right: -20px;
+} /* arreglar bottom padding/gap */
 
 #gameFinderLogo {
     width: 293px;
@@ -108,4 +108,8 @@
     text-align: left;
     justify-content: flex-start;
     padding-left: 7%;
+}
+.transparent{
+    background-color: transparent;
+    border: none;
 }

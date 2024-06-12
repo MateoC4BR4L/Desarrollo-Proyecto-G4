@@ -20,7 +20,7 @@ function Catalog() {
             <div id="catalogMenuWrapper">
                 <img id="gameFinderLogo" src={GameFinderLogo}/>
                 <MySearchBar id="searchBar" />
-                <MyButton title="Log In"/>
+                <MyButton title="Log out" className={"transparent"}/>
                 {/* avatar */}
             </div>
             <div id="catalogBodyUpper">
@@ -34,8 +34,8 @@ function Catalog() {
                         {/* switch */}
                     </div>
                     <div id="catalogBodyDisplayButtons">
-                        <MyButton icon={Display1} />
-                        <MyButton icon={Display2} />
+                        <MyButton icon={Display1} className={"transparent"} />
+                        <MyButton icon={Display2} className={"transparent"} />
                     </div>
                 </div>
             </div>
