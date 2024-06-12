@@ -1,5 +1,6 @@
 import App from "../../App";
 import React, { useEffect, useState } from "react";
+import './MyChips.css'
 
 function MyChips() {
     const gameDate = new Date(uploadDate).toLocaleDateString()
