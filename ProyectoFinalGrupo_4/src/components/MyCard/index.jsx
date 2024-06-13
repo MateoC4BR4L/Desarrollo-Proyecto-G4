@@ -1,5 +1,9 @@
 import React from "react";
 import displayPhoto from "../../assets/biomutantpic0044-810x400.jpg"
+import WINDOWS from "../../assets/WINDOWS.svg"
+import PSN from "../../assets/PSN.svg"
+import XBOX from "../../assets/XBOX.svg"
+import SWITCH from "../../assets/SWITCH.svg"
 import './index.css'
 
 
@@ -15,16 +19,21 @@ function MyCard({ size }){
                 {/* esta info tiene que ser aportada por la api  
                     falta el corazoncito en la imagen para darle favorite*/}
             </div>
-            <div className="cardInnerInfoContainerSmall">
-                    <div className="cardInnerInfoContainerTextSmall">
-                        <p>Release date:    *date*</p>
-                        <p>Genre:    *genre*</p>
-                        {/* esta info tiene que ser aportada por la api*/}
+            <div className="cardInnerBottomContainerSmall">
+                <div className="cardInnerBottomUpperSmall">
+                    <p id="releaseDate">Release date:</p>
+                    <p id="date">    Apr 21, 2021</p>
+                    <div className="iconsContainer">
+                        <img src={WINDOWS} id="windows"/>
+                        <img src={PSN} id="psn"/>
+                        <img src={XBOX} id="xbox"/>
+                        <img src={SWITCH} id="switch"/>
                     </div>
-                    <div className="cardInnerInfoContainerIconsSmall">
-                        <p> fokin icons </p> 
-                        {/* descargar los iconos y llamarlos aca */}
-                    </div>
+                </div>
+                <div className="cardInnerBottomLowerSmall">
+                    <p id="genre">Genre:</p>
+                    <p id="tags">    Action, RPG</p>
+                </div>  
             </div>
         </div>)
     } else if (size === "big") {
