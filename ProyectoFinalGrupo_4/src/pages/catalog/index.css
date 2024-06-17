@@ -83,6 +83,22 @@
     text-align: left;
 }
 
+#darkModeContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+#darkModeText{
+    display: flex;
+    width: 86px;
+    height: 39px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
 .bodyMenuTitle {
     font-family: Exo;
     font-size: 20px;
@@ -99,7 +115,6 @@
     text-align: left;
     justify-content: flex-start;
 }
-
 .catalogBodyLowerMenuTitle{
     font-family: Exo;
     font-size: 22px;

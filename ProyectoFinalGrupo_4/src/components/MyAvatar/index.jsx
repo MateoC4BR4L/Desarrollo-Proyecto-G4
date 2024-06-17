@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export const Avatars = ({ isLoggedIn }) => {
+export const MyAvatar = ({ isLoggedIn }) => {
     const [paths, setPaths] = useState('https://i.pinimg.com/236x/13/71/c1/1371c163a3d785d5bb4bfd3e8c78b2fb.jpg')
     const [avatar, setAvatar] = useState(null)
     useEffect(() => {

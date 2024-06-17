@@ -11,17 +11,19 @@ import CalendarIcon from "../../assets/Calendar.svg"
 import ClockIcon from "../../assets/Clock.svg"
 import SearchIcon from "../../assets/Search.svg"
 import ThumbsUpIcon from "../../assets/Thumbs Up.svg"
+import { MyAvatar } from "../../components/MyAvatar";
+import { MySwitch } from "../../components/MySwitch";
 
 
 function Catalog() {
-    function hola(){alert("Hola")}
+    function hola(){}
     return (
         <div id="catalogWrapper">
             <div id="catalogMenuWrapper">
                 <img id="gameFinderLogo" src={GameFinderLogo}/>
                 <MySearchBar id="searchBar" />
                 <MyButton title="Log out" className={"transparent"}/>
-                {/* avatar */}
+                <MyAvatar />
             </div>
             <div id="catalogBodyUpper">
                 <div id="catalogBodyUpperLeft">
@@ -30,8 +32,8 @@ function Catalog() {
                 </div>
                 <div id="catalogBodyUpperRight">
                     <div id="darkModeContainer">
-                        <p>Dark mode *switch*</p>
-                        {/* switch */}
+                        <p id="darkModeText">Dark mode</p>
+                        <MySwitch />
                     </div>
                     <div id="catalogBodyDisplayButtons">
                         <MyButton icon={Display1} className={"transparent"} />
@@ -41,7 +43,7 @@ function Catalog() {
             </div>
             <div id="catalogBodyLower">
                 <div id="catalogBodyLowerMenu">
-                    <MyButton title="Home" className="bodyMenuTitle" />
+                    <MyButton title="Home" className="bodyMenuTitle" onClick={hola}/>
                     <MyButton title="Reviews" className="bodyMenuTitle" />
                     <h3 className="catalogBodyLowerMenuTitle">New Releases</h3> 
                     <MyButton icon={StarIcon} title="This week" className="bodyMenuOptions" />

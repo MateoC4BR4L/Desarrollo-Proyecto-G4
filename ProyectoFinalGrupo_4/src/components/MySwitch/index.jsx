@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./MySwitches.css"; // Assuming you have some styles for the switch
+import "./index.css"; // Assuming you have some styles for the switch
 
-export const MySwitches = () => {
+export const MySwitch = () => {
     const [isChecked, setIsChecked] = useState(false);
 
     return (
