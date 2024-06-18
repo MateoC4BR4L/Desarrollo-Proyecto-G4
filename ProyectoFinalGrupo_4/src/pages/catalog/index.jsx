@@ -1,6 +1,5 @@
 import React from "react";
 import MyCard from "../../components/MyCard";
-import MySearchBar from "../../components/MySearchBar/MySearchBar";
 import MyButton from "../../components/MyButton/MyButton";
 import "./index.css"
 import GameFinderLogo from "../../assets/White.svg"
@@ -13,7 +12,7 @@ import SearchIcon from "../../assets/Search.svg"
 import ThumbsUpIcon from "../../assets/Thumbs Up.svg"
 import { MyAvatar } from "../../components/MyAvatar";
 import { MySwitch } from "../../components/MySwitch";
-
+import MyDropdown from "../../components/MyDropdown/MyDropdown.jsx"
 
 function Catalog() {
     function hola(){}
@@ -21,7 +20,7 @@ function Catalog() {
         <div id="catalogWrapper">
             <div id="catalogMenuWrapper">
                 <img id="gameFinderLogo" src={GameFinderLogo}/>
-                <MySearchBar id="searchBar" />
+                <MyDropdown id="searchBar" />
                 <MyButton title="Log out" className={"transparent"}/>
                 <MyAvatar />
             </div>

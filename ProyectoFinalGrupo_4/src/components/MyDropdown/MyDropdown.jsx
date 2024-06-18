@@ -1,41 +1,26 @@
-import App from "../../App";
-import React from "react";
-import './MyDropdown.css'
+import React, { useState, useEffect } from "react";
+import "./MyDropdown.css"; 
+import MySearchBar from "../MySearchBar/MySearchBar";
 
 function MyDropdown() {
-    return (
-        <div className="Dropdown">
-            <input placeholder="Search games..."></input>
-        </div>
-    )
-}
-
-export default MyDropdown;
-
-/*
-import React, { useState, useEffect } from "react";
-import "./Dropdown.css"; // Importa los estilos
-
-function Dropdown() {
     const [options, setOptions] = useState([]);
     const [filteredOptions, setFilteredOptions] = useState([]);
     const [inputValue, setInputValue] = useState("");
+    const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
-    // Simula una llamada a una API para obtener las opciones
     useEffect(() => {
         async function fetchOptions() {
             // Simula un retraso
-            await new Promise((resolve) => setTimeout(resolve, 500));
+            //await new Promise((resolve) => setTimeout(resolve, 500));
 
             // Supongamos que esta es la respuesta de la API
-            const fetchedOptions = ["Apple", "Banana", "Orange", "Mango", "Pineapple", "Grape"];
+            const fetchedOptions = ["Mario Party 1", "Mario Party 2", "Mario Party 3", "Mario Party 4"];
             setOptions(fetchedOptions);
         }
 
         fetchOptions();
     }, []);
 
-    // Filtra las opciones basadas en el input del usuario
     useEffect(() => {
         if (inputValue === "") {
             setFilteredOptions([]);
@@ -45,25 +30,29 @@ function Dropdown() {
         }
     }, [inputValue, options]);
 
+    useEffect(() => {
+        setIsDropdownVisible(filteredOptions.length > 0 || inputValue !== "");
+    }, [filteredOptions, inputValue]);
+
     return (
-        <div className="Dropdown">
-            <input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Type to search..."
-            />
-            {filteredOptions.length > 0 && (
-                <ul className="Dropdown-options">
-                    {filteredOptions.map((option, index) => (
-                        <li key={index}>{option}</li>
-                    ))}
-                </ul>
-            )}
-        </div>
+        <>
+            {isDropdownVisible && <div className="Overlay" onClick={() => setInputValue("")}></div>}
+            <div className="Dropdown">
+                <MySearchBar 
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)} 
+                    onFocus={() => setIsDropdownVisible(true)}
+                />
+                {isDropdownVisible && (
+                    <ul className="DropdownList">
+                        {filteredOptions.map((option, index) => (
+                            <button className="DropdownButton" key={index}>{option}</button>
+                        ))}
+                    </ul>
+                )}
+            </div>
+        </>
     );
 }
 
-export default Dropdown;
-
-*/
+export default MyDropdown;

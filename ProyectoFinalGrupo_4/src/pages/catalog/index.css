@@ -15,6 +15,7 @@
     background: linear-gradient(180deg, #5FE19B 0%, #36B972 50%, #0EA152 100%);
     box-shadow: 1px -3px 36px 0px #00000080;
     padding: 10px;
+    align-items: center;
 }
 
 #searchBar {
@@ -22,7 +23,6 @@
     margin-right: auto;
     width: 362px;
     height: 47px;
-    opacity: 0px;
 }
 
 #catalogBodyUpper {
@@ -64,7 +64,7 @@
 #gameFinderLogo {
     width: 293px;
     height: 60px;
-    opacity: 0px;
+    opacity: 1;
 }
 
 #titleLarge {
