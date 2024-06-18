@@ -5,41 +5,51 @@ import PSN from "../../assets/PSN.svg"
 import XBOX from "../../assets/XBOX.svg"
 import SWITCH from "../../assets/SWITCH.svg"
 import './index.css'
+import MyButton from "../MyButton/MyButton";
 
 function genresHandler( genres ){
     const genreGames = genres.map(genre => genre.name).join(',')
     return (genreGames)
 }
+function MyCard({ size, title, released, genres, photo, platforms, id }) {
+    size = size.toLowerCase();
+    
+    const hasPlatform = (slug) => {
+        return platforms.some(platform => platform.platform.slug === slug);
+    };
 
-function MyCard({ size, title, released, genres }){
-    size = size.toLowerCase()
+    const renderPlatformIcons = () => {
+        return (
+            <div className="iconsContainer">
+                {hasPlatform('pc') && <img src={WINDOWS} id="windows" alt="Windows" />}
+                {hasPlatform('playstation') && <img src={PSN} id="psn" alt="PlayStation" />}
+                {hasPlatform('xbox') && <img src={XBOX} id="xbox" alt="Xbox" />}
+                {hasPlatform('nintendo') && <img src={SWITCH} id="switch" alt="Switch" />}
+            </div>
+        );
+    };
+
     if (size === "small") {
         return (
-        <div className="cardContainer">
-            <img className="cardGameDisplay" src={displayPhoto} /> {/* esta info tiene que ser aportada por la api */}
-            <div className="cardInnerTitleContainerSmall">
-                <h1 className="cardGameTitle">{title}</h1>
-                <h1 className="cardGameNumber">#1</h1>
-                {/* esta info tiene que ser aportada por la api  
-                    falta el corazoncito en la imagen para darle favorite*/}
-            </div>
-            <div className="cardInnerBottomContainerSmall">
-                <div className="cardInnerBottomUpperSmall">
-                    <p id="releaseDate">Release date:</p>
-                    <p id="date">    {released}</p>
-                    <div className="iconsContainer">
-                        <img src={WINDOWS} id="windows"/>
-                        <img src={PSN} id="psn"/>
-                        <img src={XBOX} id="xbox"/>
-                        <img src={SWITCH} id="switch"/>
+            <div className="cardContainer" id={`gameContainer${id}`}>
+                    <img className="cardGameDisplay" src={photo} alt={title} />
+                    <div className="cardInnerTitleContainerSmall">
+                        <h1 className="cardGameTitle">{title}</h1>
+                        <h1 className="cardGameNumber">#1</h1>
                     </div>
-                </div>
-                <div className="cardInnerBottomLowerSmall">
-                    <p id="genre">Genre:</p>
-                    <p id="tags">    {genresHandler(genres)}</p>
-                </div>  
+                    <div className="cardInnerBottomContainerSmall">
+                        <div className="cardInnerBottomUpperSmall">
+                            <p id="releaseDate">Release date:</p>
+                            <p id="date">{released}</p>
+                            {renderPlatformIcons()}
+                        </div>
+                        <div className="cardInnerBottomLowerSmall">
+                            <p id="genre">Genre:</p>
+                            <p id="tags">{genresHandler(genres)}</p>
+                        </div>
+                    </div>
             </div>
-        </div>)
+        );
     } else if (size === "big") {
         return (
             <div className="cardContainer">

@@ -1,8 +1,8 @@
 import App from "../../App";
 import "./MyButton.css";
-function MyButton({ title, onClick, className, icon }){
+function MyButton({ title, onClick, className, icon, children }){
     return(
-        <button className={`button ${className}`} onClick={onClick}><img src={icon} /> {title}</button>  
+        <button className={`button ${className}`} onClick={onClick}><img src={icon} /> {title}{children}</button>  
     )
 }
 export default MyButton;

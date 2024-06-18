@@ -71,7 +71,7 @@ function Catalog() {
                 </div>
                 <div id="catalogBodyLowerContent">
                     {games.map((g) => {
-                        return (<MyCard size={"small"} title={g.name} released={g.released} genres={g.genres} />)
+                        return (<MyCard size={"small"} title={g.name} released={g.released} genres={g.genres} photo={g.background_image} platforms={g.parent_platforms} id={g.id} />)
                     })}
                 </div>
             </div>
