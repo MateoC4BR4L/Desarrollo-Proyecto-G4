@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MyCard from "../../components/MyCard";
 import MyButton from "../../components/MyButton/MyButton";
 import "./index.css"
@@ -13,9 +13,26 @@ import ThumbsUpIcon from "../../assets/Thumbs Up.svg"
 import { MyAvatar } from "../../components/MyAvatar";
 import { MySwitch } from "../../components/MySwitch";
 import MyDropdown from "../../components/MyDropdown/MyDropdown.jsx"
+import { getGames } from "../../../api/api.ts";
 
 function Catalog() {
-    function hola(){}
+    const [games, setGames] = useState([]);
+
+    useEffect(() => {
+        const getGamesPayload = async () => {
+            try {
+                const newGames = await getGames();
+                setGames(newGames);
+            } catch (error) {
+                console.error('Error fetching games:', error);
+            }
+        };
+
+        getGamesPayload();
+    }, []);
+    function showGameInfo(){
+        console.log(games)
+    }
     return (
         <div id="catalogWrapper">
             <div id="catalogMenuWrapper">
@@ -42,7 +59,7 @@ function Catalog() {
             </div>
             <div id="catalogBodyLower">
                 <div id="catalogBodyLowerMenu">
-                    <MyButton title="Home" className="bodyMenuTitle" onClick={hola}/>
+                    <MyButton title="Home" className="bodyMenuTitle"/>
                     <MyButton title="Reviews" className="bodyMenuTitle" />
                     <h3 className="catalogBodyLowerMenuTitle">New Releases</h3> 
                     <MyButton icon={StarIcon} title="This week" className="bodyMenuOptions" />
@@ -50,13 +67,12 @@ function Catalog() {
                     <MyButton icon={ClockIcon} title="Coming soon" className="bodyMenuOptions" />
                     <h3 className="catalogBodyLowerMenuTitle">Popular</h3>
                     <MyButton icon={SearchIcon} title="Last searches" className="bodyMenuOptions" />
-                    <MyButton icon={ThumbsUpIcon} title="Best of the year" className="bodyMenuOptions" />
+                    <MyButton icon={ThumbsUpIcon} title="Best of the year" className="bodyMenuOptions" onClick={e => showGameInfo()}/>
                 </div>
                 <div id="catalogBodyLowerContent">
-                    <MyCard size={"small"} />
-                    <MyCard size={"small"} />
-                    <MyCard size={"small"} />
-                    <MyCard size={"small"} />
+                    {games.map((g) => {
+                        return (<MyCard size={"small"} title={g.name} released={g.released} genres={g.genres} />)
+                    })}
                 </div>
             </div>
         </div>

@@ -6,15 +6,19 @@ import XBOX from "../../assets/XBOX.svg"
 import SWITCH from "../../assets/SWITCH.svg"
 import './index.css'
 
+function genresHandler( genres ){
+    const genreGames = genres.map(genre => genre.name).join(',')
+    return (genreGames)
+}
 
-function MyCard({ size }){
+function MyCard({ size, title, released, genres }){
     size = size.toLowerCase()
     if (size === "small") {
         return (
         <div className="cardContainer">
             <img className="cardGameDisplay" src={displayPhoto} /> {/* esta info tiene que ser aportada por la api */}
             <div className="cardInnerTitleContainerSmall">
-                <h1 className="cardGameTitle">Game's name over here...</h1>
+                <h1 className="cardGameTitle">{title}</h1>
                 <h1 className="cardGameNumber">#1</h1>
                 {/* esta info tiene que ser aportada por la api  
                     falta el corazoncito en la imagen para darle favorite*/}
@@ -22,7 +26,7 @@ function MyCard({ size }){
             <div className="cardInnerBottomContainerSmall">
                 <div className="cardInnerBottomUpperSmall">
                     <p id="releaseDate">Release date:</p>
-                    <p id="date">    Apr 21, 2021</p>
+                    <p id="date">    {released}</p>
                     <div className="iconsContainer">
                         <img src={WINDOWS} id="windows"/>
                         <img src={PSN} id="psn"/>
@@ -32,7 +36,7 @@ function MyCard({ size }){
                 </div>
                 <div className="cardInnerBottomLowerSmall">
                     <p id="genre">Genre:</p>
-                    <p id="tags">    Action, RPG</p>
+                    <p id="tags">    {genresHandler(genres)}</p>
                 </div>  
             </div>
         </div>)
