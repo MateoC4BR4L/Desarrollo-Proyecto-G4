@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import displayPhoto from "../../assets/biomutantpic0044-810x400.jpg"
 import WINDOWS from "../../assets/WINDOWS.svg"
 import PSN from "../../assets/PSN.svg"
@@ -6,14 +6,16 @@ import XBOX from "../../assets/XBOX.svg"
 import SWITCH from "../../assets/SWITCH.svg"
 import './index.css'
 import MyButton from "../MyButton/MyButton";
+import MyModal from "../MyModal/MyModal";
 
-function genresHandler( genres ){
-    const genreGames = genres.map(genre => genre.name).join(',')
-    return (genreGames)
-}
-function MyCard({ size, title, released, genres, photo, platforms, id }) {
-    size = size.toLowerCase();
+function MyCard({ size, title, released, genres, photo, platforms, id, changeModal }) {
     
+    size = size.toLowerCase();
+        
+    function genresHandler( genres ){
+        const genreGames = genres.map(genre => genre.name).join(',')
+        return (genreGames)
+    }
     const hasPlatform = (slug) => {
         return platforms.some(platform => platform.platform.slug === slug);
     };
@@ -31,7 +33,7 @@ function MyCard({ size, title, released, genres, photo, platforms, id }) {
 
     if (size === "small") {
         return (
-            <div className="cardContainer" id={`gameContainer${id}`}>
+            <div className="cardContainer" id={`gameContainer${id}`} onClick={e => changeModal({showingBoolean: true, showingId: id})}>
                     <img className="cardGameDisplay" src={photo} alt={title} />
                     <div className="cardInnerTitleContainerSmall">
                         <h1 className="cardGameTitle">{title}</h1>

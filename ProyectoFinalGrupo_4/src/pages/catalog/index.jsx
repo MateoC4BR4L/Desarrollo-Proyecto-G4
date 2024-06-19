@@ -14,9 +14,11 @@ import { MyAvatar } from "../../components/MyAvatar";
 import { MySwitch } from "../../components/MySwitch";
 import MyDropdown from "../../components/MyDropdown/MyDropdown.jsx"
 import { getGames } from "../../../api/api.ts";
+import MyModal from "../../components/MyModal/MyModal.jsx";
 
 function Catalog() {
     const [games, setGames] = useState([]);
+    const [showingModal, changeModal] = useState({showingBoolean: false, showingId: null})
 
     useEffect(() => {
         const getGamesPayload = async () => {
@@ -71,10 +73,20 @@ function Catalog() {
                 </div>
                 <div id="catalogBodyLowerContent">
                     {games.map((g) => {
-                        return (<MyCard size={"small"} title={g.name} released={g.released} genres={g.genres} photo={g.background_image} platforms={g.parent_platforms} id={g.id} />)
+                        return (<MyCard
+                                     size={"small"} 
+                                     title={g.name} 
+                                     released={g.released} 
+                                     genres={g.genres} 
+                                     photo={g.background_image} 
+                                     platforms={g.parent_platforms} 
+                                     id={g.id} 
+                                     changeModal={changeModal}
+                                />)
                     })}
                 </div>
             </div>
+            {showingModal.showingBoolean && <MyModal showingModal={showingModal} changeModal={changeModal} />}
         </div>
     )
 }
