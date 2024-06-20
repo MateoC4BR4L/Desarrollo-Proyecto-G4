@@ -1,9 +1,11 @@
 import { getGameById } from "../../../api/api";
 import App from "../../App";
+import MyButton from "../MyButton/MyButton";
 import "./MyModal.css"
 import React, { useEffect, useState } from "react";
+import XIcon from "../../assets/X.svg"
 
-function MyModal({ title, showingModal, changeModal }){
+function MyModal({ showingModal, changeModal }){
     const [gameDetails, setGameDetails] = useState([])
 
     useEffect(() => {
@@ -11,7 +13,6 @@ function MyModal({ title, showingModal, changeModal }){
             try {
                 const newGameDetails = await getGameById(showingModal.showingId)
                 setGameDetails(newGameDetails)
-                console.log(newGameDetails)
             } catch (error) {
                 console.error(`Error fetching game with id ${id} details:`, error)
             }
@@ -26,9 +27,10 @@ function MyModal({ title, showingModal, changeModal }){
     return(
         <>
         <div className="darkBG" onClick={() => changeModal({showingBoolean: false, showingId: null})} />
-        <div className="centered modal" onClick={e => console.log(showingModal.id)}>
-            <div className="modalHeader">
-                <h5 className="heading">{showingModal.showingId}</h5>
+        <div className="modal" onClick={e => console.log(showingModal.id)}>
+            <div id="gameImageContainer">
+                <img id="gameImage" src={gameDetails.background_image} />
+                <MyButton className="transparent" icon={XIcon} onClick={() => changeModal({showingBoolean: false, showingId: null})}/>
             </div>
         </div>
         </>
