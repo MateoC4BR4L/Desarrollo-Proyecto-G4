@@ -40,8 +40,10 @@ function Catalog() {
             <div id="catalogMenuWrapper">
                 <img id="gameFinderLogo" src={GameFinderLogo}/>
                 <MyDropdown id="searchBar" />
-                <MyButton title="Log out" className={"transparent"}/>
-                <MyAvatar />
+                <div id="logOut">
+                    <MyButton title="Log out" className={"transparent"}/>
+                    <MyAvatar />
+                </div>
             </div>
             <div id="catalogBodyUpper">
                 <div id="catalogBodyUpperLeft">
