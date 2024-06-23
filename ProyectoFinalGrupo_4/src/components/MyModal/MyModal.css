@@ -53,19 +53,31 @@
   border: none;
 }
 
-.modalHeader {
-  height: 50px;
-  background: white;
-  overflow: hidden;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+#titleComponents{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.heading {
-  margin: 0;
-  padding: 10px;
-  color: #2c3e50;
-  font-weight: 500;
-  font-size: 18px;
-  text-align: center;
+#chipsContainer{
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+}
+
+#descriptionContainer{
+  width: 60%;
+  text-align: left;
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#buttonsContainer{
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  margin-left: 15%;
+  gap: 5%;
 }

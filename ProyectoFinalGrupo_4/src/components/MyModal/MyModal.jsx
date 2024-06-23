@@ -8,6 +8,7 @@ import WINDOWS from "../../assets/WINDOWS.svg"
 import PSN from "../../assets/PSN.svg"
 import XBOX from "../../assets/XBOX.svg"
 import SWITCH from "../../assets/SWITCH.svg"
+import MyChips from "../MyChips/MyChips";
 
 function MyModal({ showingModal, changeModal }){
     const [gameDetails, setGameDetails] = useState([])
@@ -43,15 +44,36 @@ function MyModal({ showingModal, changeModal }){
     const hasPlatform = (slug) => {
         return gameDetails?.parent_platforms?.some(platform => platform.platform.slug === slug);
     };
-
     return(
         <>
         <div className="darkBG" onClick={() => changeModal({showingBoolean: false, showingId: null})} />
         <div className="modal">
             <div id="gameImageContainer" style={{ backgroundImage: `url(${gameDetails.background_image})` }}>
                 <MyButton className="transparent" icon={XIcon} onClick={() => changeModal({showingBoolean: false, showingId: null})}/>
-                {renderPlatformIcons()}
-                <h1>{gameDetails.name}</h1>
+                <div id="titleComponents">
+                    {renderPlatformIcons()}
+                    <h1>{gameDetails.name}</h1>
+                    <div id="chipsContainer">
+                        <MyChips /> <MyChips /> <MyChips />
+                    </div>
+                </div>
+                <div id="bottomContainer">
+                    <div id="descriptionContainer">
+                        {gameDetails.description_raw}
+                        <MyButton className="transparent" title="Read more" />
+                    </div>
+                    <div id="buttonsContainer">
+                        <MyButton title="Add to wishlist" />
+                        <MyButton title="Purchase" />
+                    </div>
+                    <div id="miscInfoContainer">
+                        
+                    </div>
+                    <div id="mediaContainer">
+
+                    </div>
+                </div>
+                
             </div>
         </div>
         </>

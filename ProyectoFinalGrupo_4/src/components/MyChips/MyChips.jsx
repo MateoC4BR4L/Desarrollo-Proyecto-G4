@@ -3,11 +3,10 @@ import React, { useEffect, useState } from "react";
 import './MyChips.css'
 
 function MyChips() {
-    const gameDate = new Date(uploadDate).toLocaleDateString()
 
     return (
         <div className="Chips">
-            {gameDate}
+            <p>AAAAAAAAAAAA</p>
         </div>
     )
 }
