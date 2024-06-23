@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from "react";
-import "./MyDropdown.css"; 
+import "./MyDropdown.css";
 import MySearchBar from "../MySearchBar/MySearchBar";
+import { getGames } from "../../../api/api";
+import MyModal from "../MyModal/MyModal"; 
 
 function MyDropdown() {
     const [options, setOptions] = useState([]);
     const [filteredOptions, setFilteredOptions] = useState([]);
     const [inputValue, setInputValue] = useState("");
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+    const [showingModal, setShowingModal] = useState({ showingBoolean: false, showingId: null }); // Estado para el modal
 
     useEffect(() => {
         async function fetchOptions() {
-            // Simula un retraso
-            //await new Promise((resolve) => setTimeout(resolve, 500));
-
-            // Supongamos que esta es la respuesta de la API
-            const fetchedOptions = ["Mario Party 1", "Mario Party 2", "Mario Party 3", "Mario Party 4"];
-            setOptions(fetchedOptions);
+            const fetchedGames = await getGames();
+            const gameNames = fetchedGames.map(game => ({ id: game.id, name: game.name }));
+            setOptions(gameNames);
         }
-
         fetchOptions();
     }, []);
 
@@ -26,7 +25,7 @@ function MyDropdown() {
             setFilteredOptions([]);
         } else {
             const lowerCaseInput = inputValue.toLowerCase();
-            setFilteredOptions(options.filter(option => option.toLowerCase().includes(lowerCaseInput)));
+            setFilteredOptions(options.filter(option => option.name.toLowerCase().includes(lowerCaseInput)));
         }
     }, [inputValue, options]);
 
@@ -34,9 +33,24 @@ function MyDropdown() {
         setIsDropdownVisible(filteredOptions.length > 0 || inputValue !== "");
     }, [filteredOptions, inputValue]);
 
+    const handleOverlayClick = () => {
+        setIsDropdownVisible(false);
+        setInputValue("");
+    };
+
+    const handleOptionClick = (id) => {
+        setShowingModal({ showingBoolean: true, showingId: id });
+        setIsDropdownVisible(false);
+        setInputValue("");
+    };
+
+    const changeModal = (modalState) => {
+        setShowingModal(modalState);
+    };
+
     return (
         <>
-            {isDropdownVisible && <div className="Overlay" onClick={() => setInputValue("")}></div>}
+            {isDropdownVisible && <div className="Overlay" onClick={handleOverlayClick}></div>}
             <div className="Dropdown">
                 <MySearchBar 
                     value={inputValue}
@@ -45,14 +59,27 @@ function MyDropdown() {
                 />
                 {isDropdownVisible && (
                     <ul className="DropdownList">
-                        {filteredOptions.map((option, index) => (
-                            <button className="DropdownButton" key={index}>{option}</button>
+                        {filteredOptions.map((option) => (
+                            <button 
+                                className="DropdownButton" 
+                                key={option.id} 
+                                onClick={() => handleOptionClick(option.id)}
+                            >
+                                {option.name}
+                            </button>
                         ))}
                     </ul>
                 )}
             </div>
+            {showingModal.showingBoolean && (
+                <MyModal
+                    showingModal={showingModal}
+                    changeModal={changeModal}
+                />
+            )}
         </>
     );
 }
 
 export default MyDropdown;
+

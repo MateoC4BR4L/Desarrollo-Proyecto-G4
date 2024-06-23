@@ -12,10 +12,16 @@
 #catalogMenuWrapper {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     background: linear-gradient(180deg, #5FE19B 0%, #36B972 50%, #0EA152 100%);
     box-shadow: 1px -3px 36px 0px #00000080;
     padding: 10px;
     align-items: center;
+}
+
+#logOut {
+    display: flex;
+    justify-content: space-around;
 }
 
 #searchBar {
