@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {useNavigate} from 'react-router-dom';
 import MyCard from "../../components/MyCard";
 import MyButton from "../../components/MyButton/MyButton";
 import "./index.css"
@@ -15,10 +16,13 @@ import { MySwitch } from "../../components/MySwitch";
 import MyDropdown from "../../components/MyDropdown/MyDropdown.jsx"
 import { getGames } from "../../../api/api.ts";
 import MyModal from "../../components/MyModal/MyModal.jsx";
+import MyLogOut from "../../components/MyLogOut/index.jsx";
 
 function Catalog() {
     const [games, setGames] = useState([]);
     const [showingModal, changeModal] = useState({showingBoolean: false, showingId: null})
+    const [showLogout, setShowLogout] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getGamesPayload = async () => {
@@ -32,16 +36,23 @@ function Catalog() {
 
         getGamesPayload();
     }, []);
+
     function showGameInfo(){
         console.log(games)
     }
+
+    const handleLogout = () => {
+        setShowLogout(false);
+        navigate('/login');
+    };
+
     return (
         <div id="catalogWrapper">
             <div id="catalogMenuWrapper">
                 <img id="gameFinderLogo" src={GameFinderLogo}/>
                 <MyDropdown id="searchBar" />
                 <div id="logOut">
-                    <MyButton title="Log out" className={"transparent"}/>
+                    <MyButton title="Log out" className={"transparent"} onClick={() => setShowLogout(true)} />
                     <MyAvatar />
                 </div>
             </div>
@@ -89,6 +100,7 @@ function Catalog() {
                 </div>
             </div>
             {showingModal.showingBoolean && <MyModal showingModal={showingModal} changeModal={changeModal} />}
+            {showLogout && <MyLogOut isOpen={showLogout} onClose={() => setShowLogout(false)} onLogout ={handleLogout}/>}
         </div>
     )
 }
