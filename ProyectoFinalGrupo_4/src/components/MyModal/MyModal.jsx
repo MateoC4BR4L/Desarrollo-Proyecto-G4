@@ -44,10 +44,16 @@ function MyModal({ showingModal, changeModal }){
     const hasPlatform = (slug) => {
         return gameDetails?.parent_platforms?.some(platform => platform.platform.slug === slug);
     };
+    
+    const platformsComponent = async () => {
+        await gameDetails
+        return gameDetails?.platform?.join(',')
+    }
+
     return(
         <>
         <div className="darkBG" onClick={() => changeModal({showingBoolean: false, showingId: null})} />
-        <div className="modal">
+        <div className="gameDetailsContainer">
             <div id="gameImageContainer" style={{ backgroundImage: `url(${gameDetails.background_image})` }}>
                 <MyButton className="transparent" icon={XIcon} onClick={() => changeModal({showingBoolean: false, showingId: null})}/>
                 <div id="titleComponents">
@@ -67,7 +73,31 @@ function MyModal({ showingModal, changeModal }){
                         <MyButton title="Purchase" />
                     </div>
                     <div id="miscInfoContainer">
-                        
+                        <div className="miscInfoComponent">
+                            <p>Platforms</p>
+                            <p>{platformsComponent()}</p>
+                        </div>
+                        <div className="miscInfoComponent">
+                            <p>Release date</p>
+                        </div>
+                        <div className="miscInfoComponent">
+                            <p>Publisher</p>
+                        </div>
+                        <div className="miscInfoComponent">
+                            <p>Website</p>
+                        </div>
+                        <div className="miscInfoComponent">
+                            <p>Genre</p>
+                        </div>
+                        <div className="miscInfoComponent">
+                            <p>Developer</p>
+                        </div>
+                        <div className="miscInfoComponent">
+                            <p>Age rating</p>
+                        </div>
+                        <div id="interactionIcons">
+                            {/* Icons */}
+                        </div>
                     </div>
                     <div id="mediaContainer">
 
