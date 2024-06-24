@@ -12,19 +12,26 @@ import MyChips from "../MyChips/MyChips";
 
 function MyModal({ showingModal, changeModal }){
     const [gameDetails, setGameDetails] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const getGameDetails = async () =>{
+            setLoading(true)
             try {
                 const newGameDetails = await getGameById(showingModal.showingId)
                 setGameDetails(newGameDetails)
+                setLoading(false)
             } catch (error) {
                 console.error(`Error fetching game with id ${showingModal.showingId} details:`, error)
+            } finally {
+                setLoading(false)
             }
         }
 
         if (showingModal.showingId) {
             getGameDetails()
+        } else {
+            setLoading(false)
         }
 
     }, [showingModal.showingId])
@@ -45,69 +52,140 @@ function MyModal({ showingModal, changeModal }){
         return gameDetails?.parent_platforms?.some(platform => platform.platform.slug === slug);
     };
     
-    const platformsComponent = async () => {
-        await gameDetails
-        return gameDetails?.platform?.join(',')
+    const platformsComponent = () => {
+        let platformsArray = gameDetails.platforms
+        let string = ''
+        
+        platformsArray.forEach(e => {
+            string += e.platform.name + ", ";
+        });
+        
+        string = string.slice(0, -2);
+        
+        return string;
     }
 
-    return(
-        <>
-        <div className="darkBG" onClick={() => changeModal({showingBoolean: false, showingId: null})} />
-        <div className="gameDetailsContainer">
-            <div id="gameImageContainer" style={{ backgroundImage: `url(${gameDetails.background_image})` }}>
-                <MyButton className="transparent" icon={XIcon} onClick={() => changeModal({showingBoolean: false, showingId: null})}/>
-                <div id="titleComponents">
-                    {renderPlatformIcons()}
-                    <h1>{gameDetails.name}</h1>
-                    <div id="chipsContainer">
-                        <MyChips /> <MyChips /> <MyChips />
-                    </div>
-                </div>
-                <div id="bottomContainer">
-                    <div id="descriptionContainer">
-                        {gameDetails.description_raw}
-                        <MyButton className="transparent" title="Read more" />
-                    </div>
-                    <div id="buttonsContainer">
-                        <MyButton title="Add to wishlist" />
-                        <MyButton title="Purchase" />
-                    </div>
-                    <div id="miscInfoContainer">
-                        <div className="miscInfoComponent">
-                            <p>Platforms</p>
-                            <p>{platformsComponent()}</p>
-                        </div>
-                        <div className="miscInfoComponent">
-                            <p>Release date</p>
-                        </div>
-                        <div className="miscInfoComponent">
-                            <p>Publisher</p>
-                        </div>
-                        <div className="miscInfoComponent">
-                            <p>Website</p>
-                        </div>
-                        <div className="miscInfoComponent">
-                            <p>Genre</p>
-                        </div>
-                        <div className="miscInfoComponent">
-                            <p>Developer</p>
-                        </div>
-                        <div className="miscInfoComponent">
-                            <p>Age rating</p>
-                        </div>
-                        <div id="interactionIcons">
-                            {/* Icons */}
-                        </div>
-                    </div>
-                    <div id="mediaContainer">
+    const publishersComponent = () => {
+        let publishersArray = gameDetails.publishers
+        let string = ''
 
+        publishersArray.forEach(e => {
+            string += e.name + ", "
+        })
+        string = string.slice(0, -2)
+        return string
+    }
+
+    const genresComponent = () => {
+        let genresArray = gameDetails.genres
+        let string = ''
+
+        genresArray.forEach(e => {
+            string += e.name + ", "
+        })
+        string = string.slice(0, -2)
+        return string
+    }
+
+    const developersComponent = () => {
+        let developersArray = gameDetails.developers
+        let string = ''
+
+        developersArray.forEach(e => {
+            string += e.name + ", "
+        })
+        string = string.slice(0, -2)
+        return string
+    }
+
+    const ageRatingComponent = () => {
+        switch (gameDetails.esrb_rating.id) {
+            case 1:
+                return "Everyone"
+            case 2:
+                return "10+"
+            case 3:
+                return "13+"
+            case 4:
+                return "17+"
+            case 5:
+                return "18+"
+            case 6:
+                return "Pending rating"
+            case 7:
+                return "Pending rating, likely 18+"
+        }
+    }
+
+    if (!loading){
+        return(
+            <>
+            <div className="darkBG" onClick={() => changeModal({showingBoolean: false, showingId: null})} />
+            <div className="gameDetailsContainer">
+                <div id="gameImageContainer" style={{ backgroundImage: `url(${gameDetails.background_image})` }}>
+                    <MyButton className="transparent" icon={XIcon} onClick={() => changeModal({showingBoolean: false, showingId: null})}/>
+                    <div id="titleComponents">
+                        {renderPlatformIcons()}
+                        <h1>{gameDetails.name}</h1>
+                        <div id="chipsContainer">
+                            <MyChips /> <MyChips /> <MyChips />
+                        </div>
                     </div>
+                    <div id="bottomContainer">
+                        <div id="descriptionContainer">
+                            {gameDetails.description_raw}
+                            <MyButton className="transparent" title="Read more" />
+                        </div>
+                        <div id="buttonsContainer">
+                            <MyButton title="Add to wishlist" />
+                            <MyButton title="Purchase" />
+                        </div>
+                        <div id="miscInfoContainer">
+                            <div className="miscInfoComponent">
+                                <p>Platforms</p>
+                                <p>{platformsComponent()}</p>
+                            </div>
+                            <div className="miscInfoComponent">
+                                <p>Release date</p>
+                                <p>{gameDetails.released}</p>
+                            </div>
+                            <div className="miscInfoComponent">
+                                <p>Publisher</p>
+                                {publishersComponent()}
+                            </div>
+                            <div className="miscInfoComponent">
+                                <p>Website</p>
+                                <p>{gameDetails.website}</p>
+                            </div>
+                            <div className="miscInfoComponent">
+                                <p>Genre</p>
+                                <p>{genresComponent()}</p>
+                            </div>
+                            <div className="miscInfoComponent">
+                                <p>Developer</p>
+                                <p>{developersComponent()}</p>
+                            </div>
+                            <div className="miscInfoComponent">
+                                <p>Age rating</p>
+                                <p>{ageRatingComponent()}</p>
+                            </div>
+                            <div id="interactionIcons">
+                                {/* Icons */}
+                            </div>
+                        </div>
+                        <div id="mediaContainer">
+    
+                        </div>
+                    </div>
+                    
                 </div>
-                
             </div>
-        </div>
-        </>
-    );
+            </>
+        );
+    } else {
+        return 
+    }
+    
 };
 
 export default MyModal;
