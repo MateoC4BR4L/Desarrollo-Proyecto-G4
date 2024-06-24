@@ -53,6 +53,7 @@
     display: flex;
     flex: 1;
     overflow: hidden;
+    transition: background-color 0.5s, color 0.5s; /* Esto es para hacer una transición fluida */
 }
 
 #catalogBodyLower.dark-mode {
@@ -132,6 +133,7 @@
     font-weight: 700;
     line-height: 26.58px;
     text-align: left;
+    transition: background-color 0.5s, color 0.5s; /* Esto es para hacer una transición fluida */
 }
 
 .bodyMenuOptions {
@@ -141,6 +143,7 @@
     line-height: 23.92px;
     text-align: left;
     justify-content: flex-start;
+    transition: background-color 0.5s, color 0.5s; /* Esto es para hacer una transición fluida */
 }
 
 .bodyMenuTitle.dark-mode {
