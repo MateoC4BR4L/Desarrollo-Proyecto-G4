@@ -7,6 +7,17 @@
     flex-direction: column;
     height: 100vh; /* Ensure it takes the full viewport height */
     width: 100vw;
+    transition: background-color 0.5s, color 0.5s; /* Esto es para hacer una transición fluida */
+}
+
+#catalogWrapper.light-mode {
+    background: #F0F0F0;
+    color: #151515;
+}
+
+#catalogWrapper.dark-mode {
+    background: #151515;
+    color: #FFFFFF;
 }
 
 #catalogMenuWrapper {
@@ -44,6 +55,16 @@
     overflow: hidden;
 }
 
+#catalogBodyLower.dark-mode {
+    background: #151515;
+    color: #FFFFFF;
+}
+
+#catalogBodyLower.light-mode {
+    background: #F0F0F0;
+    color: #151515;
+}
+
 #catalogBodyLowerMenu {
     display: flex;
     flex-direction: column;
@@ -51,7 +72,7 @@
     position: sticky;
     top: 0;
     height: 100%;
-    background: #151515; /* Ensure background color matches */
+     /* Ensure background color matches */
     padding: 20px;
     flex-shrink: 0;
     justify-content: flex-start;
@@ -121,6 +142,27 @@
     text-align: left;
     justify-content: flex-start;
 }
+
+.bodyMenuTitle.dark-mode {
+    background: #151515;
+    color: #FFFFFF;
+}
+
+.bodyMenuTitle.light-mode {
+    background: #F0F0F0;
+    color: #151515;
+}
+
+.bodyMenuOptions.dark-mode {
+    background: #151515;
+    color: #FFFFFF;
+}
+
+.bodyMenuOptions.light-mode {
+    background: #F0F0F0;
+    color: #151515;
+}
+
 .catalogBodyLowerMenuTitle{
     font-family: Exo;
     font-size: 22px;

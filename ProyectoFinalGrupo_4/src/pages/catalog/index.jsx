@@ -6,6 +6,8 @@ import "./index.css"
 import GameFinderLogo from "../../assets/White.svg"
 import Display1 from "../../assets/ThumbnailsActive.svg"
 import Display2 from "../../assets/Disabled.svg"
+import Display1Light from "../../assets/ThumbnailsActiveLightMode.svg"
+import Display2Light from "../../assets/DisabledLightMode.svg"
 import StarIcon from "../../assets/Star.svg"
 import CalendarIcon from "../../assets/Calendar.svg"
 import ClockIcon from "../../assets/Clock.svg"
@@ -19,6 +21,7 @@ import MyModal from "../../components/MyModal/MyModal.jsx";
 import MyLogOut from "../../components/MyLogOut/index.jsx";
 
 function Catalog() {
+    const [darkMode, setDarkMode] = useState(true); // Modo oscuro predeterminado
     const [games, setGames] = useState([]);
     const [showingModal, changeModal] = useState({showingBoolean: false, showingId: null})
     const [showLogout, setShowLogout] = useState(false);
@@ -36,6 +39,55 @@ function Catalog() {
 
         getGamesPayload();
     }, []);
+
+    useEffect(() => {
+        const applyDarkModeClasses = () => {
+            const catalogWrapper = document.getElementById('catalogWrapper');
+            const bodyMenuTitles = document.querySelectorAll('.bodyMenuTitle');
+            const bodyMenuOptions = document.querySelectorAll('.bodyMenuOptions');
+            const catalogBodyLower = document.getElementById('catalogBodyLower');
+
+            if (darkMode) {
+                catalogWrapper.classList.add('dark-mode');
+                catalogWrapper.classList.remove('light-mode');
+
+                catalogBodyLower.classList.add('dark-mode');
+                catalogBodyLower.classList.remove('light-mode');
+
+                bodyMenuTitles.forEach(title => {
+                    title.classList.add('dark-mode');
+                    title.classList.remove('light-mode');
+                });
+    
+                bodyMenuOptions.forEach(option => {
+                    option.classList.add('dark-mode');
+                    option.classList.remove('light-mode');
+                });
+            } else {
+                catalogWrapper.classList.remove('dark-mode');
+                catalogWrapper.classList.add('light-mode');
+
+                catalogBodyLower.classList.remove('dark-mode');
+                catalogBodyLower.classList.add('light-mode');
+    
+                bodyMenuTitles.forEach(title => {
+                    title.classList.remove('dark-mode');
+                    title.classList.add('light-mode');
+                });
+    
+                bodyMenuOptions.forEach(option => {
+                    option.classList.remove('dark-mode');
+                    option.classList.add('light-mode');
+                });
+            }
+        };
+    
+        applyDarkModeClasses();
+    }, [darkMode]);    
+
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+    };
 
     function showGameInfo(){
         console.log(games)
@@ -64,11 +116,11 @@ function Catalog() {
                 <div id="catalogBodyUpperRight">
                     <div id="darkModeContainer">
                         <p id="darkModeText">Dark mode</p>
-                        <MySwitch />
+                        <MySwitch checked={darkMode} onChange={toggleDarkMode} />
                     </div>
                     <div id="catalogBodyDisplayButtons">
-                        <MyButton icon={Display1} className={"transparent"} />
-                        <MyButton icon={Display2} className={"transparent"} />
+                        <MyButton icon={darkMode ? Display1 : Display1Light} className={"transparent"} />
+                        <MyButton icon={darkMode ? Display2 : Display2Light} className={"transparent"} />
                     </div>
                 </div>
             </div>
@@ -95,6 +147,7 @@ function Catalog() {
                                      platforms={g.parent_platforms} 
                                      id={g.id} 
                                      changeModal={changeModal}
+                                     darkMode={darkMode}
                                 />)
                     })}
                 </div>
