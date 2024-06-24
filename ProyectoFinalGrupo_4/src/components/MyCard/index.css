@@ -7,6 +7,7 @@
     border-radius: 12px;
     background: #303030;
     padding-bottom: 15px;
+    transition: background-color 0.5s, color 0.5s; /* Esto es para hacer una transición fluida */
 }
 .cardContainer.dark-mode{
    background: #303030;
@@ -115,6 +116,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    transition: background-color 0.5s, color 0.5s; /* Esto es para hacer una transición fluida */
 }
 
 .cardGameTitle.dark-mode {
