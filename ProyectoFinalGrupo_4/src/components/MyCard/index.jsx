@@ -1,17 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import displayPhoto from "../../assets/biomutantpic0044-810x400.jpg"
 import WINDOWS from "../../assets/WINDOWS.svg"
 import PSN from "../../assets/PSN.svg"
 import XBOX from "../../assets/XBOX.svg"
 import SWITCH from "../../assets/SWITCH.svg"
+import WINDOWSLIGHT from "../../assets/WINDOWSLIGHT.svg"
+import PSNLIGHT from "../../assets/PSNLIGHT.svg"
+import XBOXLIGHT from "../../assets/XBOXLIGHT.svg"
+import SWITCHLIGHT from "../../assets/SWITCHLIGHT.svg"
 import './index.css'
-import MyButton from "../MyButton/MyButton";
-import MyModal from "../MyModal/MyModal";
 
-function MyCard({ size, title, released, genres, photo, platforms, id, changeModal }) {
+function MyCard({ size, title, released, genres, photo, platforms, id, changeModal, darkMode }) {
     
+    useEffect(() => {
+        const applyDarkModeClasses = () => {
+            const cardContainer = document.querySelectorAll('.cardContainer');
+            const cardGameTitle = document.querySelectorAll('.cardGameTitle');
+
+            if (darkMode) {
+                cardContainer.forEach(title => {
+                    title.classList.add('dark-mode');
+                    title.classList.remove('light-mode');
+                });
+
+                cardGameTitle.forEach(title => {
+                    title.classList.add('dark-mode');
+                    title.classList.remove('light-mode');
+                })
+            } else {
+                cardContainer.forEach(title => {
+                    title.classList.remove('dark-mode');
+                    title.classList.add('light-mode');
+                });
+
+                cardGameTitle.forEach(title => {
+                    title.classList.remove('dark-mode');
+                    title.classList.add('light-mode');
+                })
+            }
+        };
+    
+        applyDarkModeClasses();
+    }, [darkMode]);
+
     size = size.toLowerCase();
-        
+    
     function genresHandler( genres ){
         const genreGames = genres.map(genre => genre.name).join(',')
         return (genreGames)
@@ -22,11 +55,11 @@ function MyCard({ size, title, released, genres, photo, platforms, id, changeMod
 
     const renderPlatformIcons = () => {
         return (
-            <div className="iconsContainer">
-                {hasPlatform('pc') && <img src={WINDOWS} id="windows" alt="Windows" />}
-                {hasPlatform('playstation') && <img src={PSN} id="psn" alt="PlayStation" />}
-                {hasPlatform('xbox') && <img src={XBOX} id="xbox" alt="Xbox" />}
-                {hasPlatform('nintendo') && <img src={SWITCH} id="switch" alt="Switch" />}
+            <div className={'iconsContainer'}>
+                {hasPlatform('pc') && <img src={darkMode ? WINDOWS: WINDOWSLIGHT} id="windows" alt="Windows" />}
+                {hasPlatform('playstation') && <img src={darkMode ? PSN : PSNLIGHT} id="psn" alt="PlayStation" />}
+                {hasPlatform('xbox') && <img src={darkMode ? XBOX : XBOXLIGHT} id="xbox" alt="Xbox" />}
+                {hasPlatform('nintendo') && <img src={darkMode ? SWITCH : SWITCHLIGHT} id="switch" alt="Switch" />}
             </div>
         );
     };
