@@ -142,7 +142,10 @@ function Catalog() {
                 <div id="catalogBodyLowerContent">
                     {loading
                         ? Array.from({ length: 10 }).map((_, index) => (
-                            <MySkeletonCard key={index} />
+                            <MySkeletonCard 
+                                key={index} 
+                                darkMode={darkMode} 
+                            />
                         ))
                         : games.map((g) => (
                             <MyCard
