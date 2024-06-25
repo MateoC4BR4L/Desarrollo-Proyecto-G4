@@ -19,10 +19,12 @@ import MyDropdown from "../../components/MyDropdown/MyDropdown.jsx"
 import { getGames } from "../../../api/api.ts";
 import MyModal from "../../components/MyModal/MyModal.jsx";
 import MyLogOut from "../../components/MyLogOut/index.jsx";
+import MySkeletonCard from "../../components/MySkeletonCard/index.jsx";
 
 function Catalog() {
     const [darkMode, setDarkMode] = useState(true); // Modo oscuro predeterminado
     const [games, setGames] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [showingModal, changeModal] = useState({showingBoolean: false, showingId: null})
     const [showLogout, setShowLogout] = useState(false);
     const navigate = useNavigate();
@@ -32,6 +34,7 @@ function Catalog() {
             try {
                 const newGames = await getGames();
                 setGames(newGames);
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching games:', error);
             }
@@ -137,19 +140,24 @@ function Catalog() {
                     <MyButton icon={ThumbsUpIcon} title="Best of the year" className="bodyMenuOptions" onClick={e => showGameInfo()}/>
                 </div>
                 <div id="catalogBodyLowerContent">
-                    {games.map((g) => {
-                        return (<MyCard
-                                     size={"small"} 
-                                     title={g.name} 
-                                     released={g.released} 
-                                     genres={g.genres} 
-                                     photo={g.background_image} 
-                                     platforms={g.parent_platforms} 
-                                     id={g.id} 
-                                     changeModal={changeModal}
-                                     darkMode={darkMode}
-                                />)
-                    })}
+                    {loading
+                        ? Array.from({ length: 10 }).map((_, index) => (
+                            <MySkeletonCard key={index} />
+                        ))
+                        : games.map((g) => (
+                            <MyCard
+                                key={g.id}
+                                size={"small"}
+                                title={g.name}
+                                released={g.released}
+                                genres={g.genres}
+                                photo={g.background_image}
+                                platforms={g.parent_platforms}
+                                id={g.id}
+                                changeModal={changeModal}
+                                darkMode={darkMode}
+                            />
+                        ))}
                 </div>
             </div>
             {showingModal.showingBoolean && <MyModal showingModal={showingModal} changeModal={changeModal} />}
