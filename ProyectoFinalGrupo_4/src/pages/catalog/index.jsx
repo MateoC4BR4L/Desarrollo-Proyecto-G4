@@ -13,6 +13,10 @@ import CalendarIcon from "../../assets/Calendar.svg"
 import ClockIcon from "../../assets/Clock.svg"
 import SearchIcon from "../../assets/Search.svg"
 import ThumbsUpIcon from "../../assets/Thumbs Up.svg"
+import Thumbnails from "../../assets/ThumbnailsDisabled.svg"
+import ThumbnailsLight from "../../assets/ThumbnailsDisabledLightMode.svg"
+import Active from "../../assets/Active.svg"
+import ActiveLight from "../../assets/ActiveLightMode.svg"
 import { MyAvatar } from "../../components/MyAvatar";
 import { MySwitch } from "../../components/MySwitch";
 import MyDropdown from "../../components/MyDropdown/MyDropdown.jsx"
@@ -27,6 +31,8 @@ function Catalog() {
     const [loading, setLoading] = useState(true);
     const [showingModal, changeModal] = useState({showingBoolean: false, showingId: null})
     const [showLogout, setShowLogout] = useState(false);
+    const [size, setSize] = useState('small');
+    const [activeButton, setActiveButton] = useState('small');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -101,6 +107,16 @@ function Catalog() {
         navigate('/login');
     };
 
+    const smallCard = () => {
+        setSize('small');
+        setActiveButton ('small');
+    };
+
+    const bigCard = () => {
+        setSize('big');
+        setActiveButton ('big');
+    };
+
     return (
         <div id="catalogWrapper">
             <div id="catalogMenuWrapper">
@@ -122,8 +138,16 @@ function Catalog() {
                         <MySwitch checked={darkMode} onChange={toggleDarkMode} />
                     </div>
                     <div id="catalogBodyDisplayButtons">
-                        <MyButton icon={darkMode ? Display1 : Display1Light} className={"transparent"} />
-                        <MyButton icon={darkMode ? Display2 : Display2Light} className={"transparent"} />
+                        <MyButton 
+                            icon={activeButton === 'small' ? (darkMode ? Display1 : Display1Light) : (darkMode ? Thumbnails : ThumbnailsLight)} 
+                            className="transparent" 
+                            onClick={smallCard}
+                        />
+                        <MyButton 
+                            icon={activeButton === 'big' ? (darkMode ? Active : ActiveLight) : (darkMode ? Display2 : Display2Light)} 
+                            className="transparent" 
+                            onClick={bigCard}
+                        />
                     </div>
                 </div>
             </div>
@@ -150,7 +174,7 @@ function Catalog() {
                         : games.map((g) => (
                             <MyCard
                                 key={g.id}
-                                size={"small"}
+                                size={size}
                                 title={g.name}
                                 released={g.released}
                                 genres={g.genres}
