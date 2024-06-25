@@ -9,6 +9,9 @@ import PSN from "../../assets/PSN.svg"
 import XBOX from "../../assets/XBOX.svg"
 import SWITCH from "../../assets/SWITCH.svg"
 import MyChips from "../MyChips/MyChips";
+import ThumbsUpIcon from "../../assets/Thumbs Up.svg"
+import chatIcon from "../../assets/Chat Bubbles.svg"
+import shareIcon from "../../assets/Action.svg"
 
 function MyModal({ showingModal, changeModal }){
     const [gameDetails, setGameDetails] = useState([])
@@ -133,7 +136,7 @@ function MyModal({ showingModal, changeModal }){
                     </div>
                     <div id="bottomContainer">
                         <div id="descriptionContainer">
-                            {gameDetails.description_raw}
+                            <p>{gameDetails.description_raw}</p>
                             <MyButton className="transparent" title="Read more" />
                         </div>
                         <div id="buttonsContainer">
@@ -170,7 +173,9 @@ function MyModal({ showingModal, changeModal }){
                                 <p>{ageRatingComponent()}</p>
                             </div>
                             <div id="interactionIcons">
-                                {/* Icons */}
+                                <img src={chatIcon} />
+                                <img src={ThumbsUpIcon} />
+                                <img src={shareIcon} />
                             </div>
                         </div>
                         <div id="mediaContainer">
