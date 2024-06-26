@@ -198,7 +198,7 @@ function MyModal({ showingModal, changeModal }){
                         </div>
                         <div id="bottomRight">
                             <div id="mediaContainer">
-                                <img src={gameScreenshots[0].image} />
+                                <img src={gameScreenshots[0].image} className="gameScreenshot" />
                             </div>
                         </div>
                     </div>
