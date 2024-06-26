@@ -1,4 +1,4 @@
-import { getGameById } from "../../../api/api";
+import { getGameById, getGameScreenshotsById } from "../../../api/api";
 import App from "../../App";
 import MyButton from "../MyButton/MyButton";
 import "./MyModal.css"
@@ -15,17 +15,31 @@ import shareIcon from "../../assets/Action.svg"
 
 function MyModal({ showingModal, changeModal }){
     const [gameDetails, setGameDetails] = useState([])
+    const [gameScreenshots, setGameScreenshots] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const getGameDetails = async () =>{
+        const getGameDetails = async () => {
             setLoading(true)
             try {
                 const newGameDetails = await getGameById(showingModal.showingId)
                 setGameDetails(newGameDetails)
+                await getGameScreenshots()
                 setLoading(false)
             } catch (error) {
                 console.error(`Error fetching game with id ${showingModal.showingId} details:`, error)
+            } finally {
+                setLoading(false)
+            }
+        }
+        const getGameScreenshots = async () => {
+            setLoading(true)
+            try {
+                const newGameScreenshots = await getGameScreenshotsById(showingModal.showingId)
+                setGameScreenshots(newGameScreenshots.results)
+                setLoading(false)
+            } catch (error) {
+                console.error(`Error fetching game screenshots for game with id ${showingModal.showingId} details:`, error)
             } finally {
                 setLoading(false)
             }
@@ -121,11 +135,13 @@ function MyModal({ showingModal, changeModal }){
     }
 
     if (!loading){
+
         return(
             <>
             <div className="darkBG" onClick={() => changeModal({showingBoolean: false, showingId: null})} />
             <div className="gameDetailsContainer">
                 <div id="gameImageContainer" style={{ backgroundImage: `url(${gameDetails.background_image})` }}>
+                <div id="gradientOverlay"></div>
                     <MyButton className="transparent" icon={XIcon} onClick={() => changeModal({showingBoolean: false, showingId: null})}/>
                     <div id="titleComponents">
                         {renderPlatformIcons()}
@@ -135,51 +151,55 @@ function MyModal({ showingModal, changeModal }){
                         </div>
                     </div>
                     <div id="bottomContainer">
-                        <div id="descriptionContainer">
-                            <p>{gameDetails.description_raw}</p>
-                            <MyButton className="transparent" title="Read more" />
+                        <div id="bottomLeft">
+                            <div id="descriptionContainer">
+                                <p>{gameDetails.description_raw}</p>
+                                <MyButton className="transparent" title="Read more" />
+                            </div>
+                            <div id="buttonsContainer">
+                                <MyButton title="Add to wishlist" />
+                                <MyButton title="Purchase" />
+                            </div>
+                            <div id="miscInfoContainer">
+                                <div className="miscInfoComponent">
+                                    <p>Platforms</p>
+                                    <p>{platformsComponent()}</p>
+                                </div>
+                                <div className="miscInfoComponent">
+                                    <p>Release date</p>
+                                    <p>{gameDetails.released}</p>
+                                </div>
+                                <div className="miscInfoComponent">
+                                    <p>Publisher</p>
+                                    {publishersComponent()}
+                                </div>
+                                <div className="miscInfoComponent">
+                                    <p>Website</p>
+                                    <p>{gameDetails.website}</p>
+                                </div>
+                                <div className="miscInfoComponent">
+                                    <p>Genre</p>
+                                    <p>{genresComponent()}</p>
+                                </div>
+                                <div className="miscInfoComponent">
+                                    <p>Developer</p>
+                                    <p>{developersComponent()}</p>
+                                </div>
+                                <div className="miscInfoComponent">
+                                    <p>Age rating</p>
+                                    <p>{ageRatingComponent()}</p>
+                                </div>
+                                <div id="interactionIcons">
+                                    <img src={chatIcon} />
+                                    <img src={ThumbsUpIcon} />
+                                    <img src={shareIcon} />
+                                </div>
+                            </div>
                         </div>
-                        <div id="buttonsContainer">
-                            <MyButton title="Add to wishlist" />
-                            <MyButton title="Purchase" />
-                        </div>
-                        <div id="miscInfoContainer">
-                            <div className="miscInfoComponent">
-                                <p>Platforms</p>
-                                <p>{platformsComponent()}</p>
+                        <div id="bottomRight">
+                            <div id="mediaContainer">
+                                <img src={gameScreenshots[0].image} />
                             </div>
-                            <div className="miscInfoComponent">
-                                <p>Release date</p>
-                                <p>{gameDetails.released}</p>
-                            </div>
-                            <div className="miscInfoComponent">
-                                <p>Publisher</p>
-                                {publishersComponent()}
-                            </div>
-                            <div className="miscInfoComponent">
-                                <p>Website</p>
-                                <p>{gameDetails.website}</p>
-                            </div>
-                            <div className="miscInfoComponent">
-                                <p>Genre</p>
-                                <p>{genresComponent()}</p>
-                            </div>
-                            <div className="miscInfoComponent">
-                                <p>Developer</p>
-                                <p>{developersComponent()}</p>
-                            </div>
-                            <div className="miscInfoComponent">
-                                <p>Age rating</p>
-                                <p>{ageRatingComponent()}</p>
-                            </div>
-                            <div id="interactionIcons">
-                                <img src={chatIcon} />
-                                <img src={ThumbsUpIcon} />
-                                <img src={shareIcon} />
-                            </div>
-                        </div>
-                        <div id="mediaContainer">
-    
                         </div>
                     </div>
                     
