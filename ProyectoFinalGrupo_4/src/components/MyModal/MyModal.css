@@ -126,9 +126,46 @@
 .gameScreenshot{
   width: 184px;
   height: 104px;
-  top: 634px;
-  left: 842px;
-  gap: 0px;
-  opacity: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+#trailerDisplay{
+  width: 384px;
+  height: 217px;
+  flex-shrink: 0;
+  margin-bottom: 5%;
+}
+
+#gameScreenshotsContainer{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5%;
+  justify-content: center;
+  align-items: center;
+}
+
+#mediaContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.primaryButton{
+  width: 228px;
+  height: 47px;
+  flex-shrink: 0;
+  background-color: #4CC986;
+  color: #FFFFFF;
+}
+
+.secondaryButton{
+  width: 229px;
+  height: 47px;
+  flex-shrink: 0;
+  color: #36B972;
+  background-color: transparent;
+  border-color: #36B972;
 }

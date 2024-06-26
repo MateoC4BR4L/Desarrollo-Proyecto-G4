@@ -1,4 +1,4 @@
-import { getGameById, getGameScreenshotsById } from "../../../api/api";
+import { getGameById, getGameScreenshotsById, getGameMoviesById } from "../../../api/api";
 import App from "../../App";
 import MyButton from "../MyButton/MyButton";
 import "./MyModal.css"
@@ -16,6 +16,7 @@ import shareIcon from "../../assets/Action.svg"
 function MyModal({ showingModal, changeModal }){
     const [gameDetails, setGameDetails] = useState([])
     const [gameScreenshots, setGameScreenshots] = useState([])
+    const [gameMovies, setGameMovies] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -32,14 +33,29 @@ function MyModal({ showingModal, changeModal }){
                 setLoading(false)
             }
         }
+
         const getGameScreenshots = async () => {
             setLoading(true)
             try {
                 const newGameScreenshots = await getGameScreenshotsById(showingModal.showingId)
                 setGameScreenshots(newGameScreenshots.results)
+                await getGameMovies()
                 setLoading(false)
             } catch (error) {
                 console.error(`Error fetching game screenshots for game with id ${showingModal.showingId} details:`, error)
+            } finally {
+                setLoading(false)
+            }
+        }
+        
+        const getGameMovies = async () => {
+            setLoading(true)
+            try {
+                const newGameMovies = await getGameMoviesById(showingModal.showingId)
+                setGameMovies(newGameMovies)
+                setLoading(false)
+            } catch (error) {
+                console.error(`Error fetching game movies for game with id ${showingModal.showingId} details:`, error)
             } finally {
                 setLoading(false)
             }
@@ -134,8 +150,34 @@ function MyModal({ showingModal, changeModal }){
         }
     }
 
-    if (!loading){
+    const movieComponent = () => {
+        if (gameMovies.count != 0){
+            return (
+                <img src={gameMovies.results[0].preview} id="trailerDisplay" />
+                /*  img onclick tiene que llamar gameMovies.results[0].data[0] en un modal para ver el video */
+            )
+        } else {
+            return
+        }
+    }
 
+    const imagesComponent = () => {
+        return (
+            <div id="gameScreenshotsContainer">
+                {hasImage(0) && <img src={gameScreenshots[0].image} className="gameScreenshot" />}
+                {hasImage(1) && <img src={gameScreenshots[1].image} className="gameScreenshot" />}
+                {hasImage(2) && <img src={gameScreenshots[2].image} className="gameScreenshot" />}
+                {hasImage(3) && <img src={gameScreenshots[3].image} className="gameScreenshot" />}
+            </div>
+        )
+    }
+
+    const hasImage = (number) => {
+        return (gameScreenshots[number] != null)
+    }
+
+    if (!loading){
+        console.log(gameScreenshots)
         return(
             <>
             <div className="darkBG" onClick={() => changeModal({showingBoolean: false, showingId: null})} />
@@ -157,8 +199,8 @@ function MyModal({ showingModal, changeModal }){
                                 <MyButton className="transparent" title="Read more" />
                             </div>
                             <div id="buttonsContainer">
-                                <MyButton title="Add to wishlist" />
-                                <MyButton title="Purchase" />
+                                <MyButton title="Add to wishlist" className="primaryButton" />
+                                <MyButton title="Purchase" className="secondaryButton" />
                             </div>
                             <div id="miscInfoContainer">
                                 <div className="miscInfoComponent">
@@ -198,7 +240,8 @@ function MyModal({ showingModal, changeModal }){
                         </div>
                         <div id="bottomRight">
                             <div id="mediaContainer">
-                                <img src={gameScreenshots[0].image} className="gameScreenshot" />
+                                {movieComponent()}
+                                {imagesComponent()}
                             </div>
                         </div>
                     </div>
@@ -214,3 +257,17 @@ function MyModal({ showingModal, changeModal }){
 };
 
 export default MyModal;
+
+
+/*
+
+AGREGAR UN DIV PARA EL HEADER QUE CONTENGA EL BOTÓN, LOS ÍCONOS, EL TÍTULO Y LOS CHIPS
+
+BOTÓN ALIGN SELF FLEX START
+JUSTIFY SELF FLEX END
+
+BOTÓN, ÍCONOS Y CHIPS
+ALIGN SELF FLEX END
+JUSTIFY SELF FLEX START
+
+*/

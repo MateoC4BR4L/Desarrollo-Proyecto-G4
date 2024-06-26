@@ -15,7 +15,6 @@ export const getGames = async () => {
 }
 
 export const getGameById = async (id) => {
-  console.log(id)
   const url = `https://api.rawg.io/api/games/${id}?key=990db89b2ae64cecbdceca51022ef2a2`
 
   /*
@@ -41,6 +40,24 @@ export const getGameById = async (id) => {
 export const getGameScreenshotsById = async (id) => {
   const url = `https://api.rawg.io/api/games/${id}/screenshots?key=990db89b2ae64cecbdceca51022ef2a2`
  
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      const payload = await response.json();
+      console.log(payload)
+      return payload;
+    } else {
+      console.error("An error happened");
+      return [];
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const getGameMoviesById = async (id) => {
+  const url = `https://api.rawg.io/api/games/${id}/movies?key=990db89b2ae64cecbdceca51022ef2a2`
+
   try {
     const response = await fetch(url);
     if (response.ok) {
