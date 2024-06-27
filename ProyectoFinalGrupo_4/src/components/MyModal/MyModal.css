@@ -55,6 +55,8 @@
   align-items: flex-start;
   z-index: 1;
   margin-top: 5%;
+  color: white !important;
+  position: relative;
 }
 
 #crossButton{
@@ -84,7 +86,6 @@
 }
 
 #gameTitle{
-  color: #FFF;
   font-family: Exo;
   font-size: 48px;
   font-style: normal;
