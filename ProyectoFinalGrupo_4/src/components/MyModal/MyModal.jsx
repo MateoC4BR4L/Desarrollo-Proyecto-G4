@@ -73,10 +73,10 @@ function MyModal({ showingModal, changeModal }){
     const renderPlatformIcons = () => {
         return (
             <div className="iconsContainer">
-                {hasPlatform('pc') && <img src={WINDOWS} id="windows" alt="Windows" />}
-                {hasPlatform('playstation') && <img src={PSN} id="psn" alt="PlayStation" />}
-                {hasPlatform('xbox') && <img src={XBOX} id="xbox" alt="Xbox" />}
-                {hasPlatform('nintendo') && <img src={SWITCH} id="switch" alt="Switch" />}
+                {hasPlatform('pc') && <img className="platformIcons" src={WINDOWS} /*id="windows"*/ alt="Windows" />}
+                {hasPlatform('playstation') && <img className="platformIcons" src={PSN} /*id="psn"*/ alt="PlayStation" />}
+                {hasPlatform('xbox') && <img className="platformIcons" src={XBOX} /*id="xbox"*/ alt="Xbox" />}
+                {hasPlatform('nintendo') && <img className="platformIcons" src={SWITCH} /*id="switch"*/ alt="Switch" />}
             </div>
         );
     };
@@ -184,10 +184,10 @@ function MyModal({ showingModal, changeModal }){
             <div className="gameDetailsContainer">
                 <div id="gameImageContainer" style={{ backgroundImage: `url(${gameDetails.background_image})` }}>
                 <div id="gradientOverlay"></div>
-                    <MyButton className="transparent" icon={XIcon} onClick={() => changeModal({showingBoolean: false, showingId: null})}/>
                     <div id="titleComponents">
+                        <MyButton id="crossButton" className="transparent" icon={XIcon} onClick={() => changeModal({showingBoolean: false, showingId: null})}/>
                         {renderPlatformIcons()}
-                        <h1>{gameDetails.name}</h1>
+                        <h1 id="gameTitle">{gameDetails.name}</h1>
                         <div id="chipsContainer">
                             <MyChips /> <MyChips /> <MyChips />
                         </div>
@@ -204,32 +204,32 @@ function MyModal({ showingModal, changeModal }){
                             </div>
                             <div id="miscInfoContainer">
                                 <div className="miscInfoComponent">
-                                    <p>Platforms</p>
-                                    <p>{platformsComponent()}</p>
+                                    <p className="miscInfoTitle">Platforms</p>
+                                    <p className="miscInfoValue">{platformsComponent()}</p>
                                 </div>
                                 <div className="miscInfoComponent">
-                                    <p>Release date</p>
-                                    <p>{gameDetails.released}</p>
+                                    <p className="miscInfoTitle">Release date</p>
+                                    <p className="miscInfoValue">{gameDetails.released}</p>
                                 </div>
                                 <div className="miscInfoComponent">
-                                    <p>Publisher</p>
-                                    {publishersComponent()}
+                                    <p className="miscInfoTitle">Publisher</p>
+                                    <p className="miscInfoValue">{publishersComponent()}</p>
                                 </div>
                                 <div className="miscInfoComponent">
-                                    <p>Website</p>
-                                    <p>{gameDetails.website}</p>
+                                    <p className="miscInfoTitle">Website</p>
+                                    <p className="miscInfoValue">{gameDetails.website}</p>
                                 </div>
                                 <div className="miscInfoComponent">
-                                    <p>Genre</p>
-                                    <p>{genresComponent()}</p>
+                                    <p className="miscInfoTitle">Genre</p>
+                                    <p className="miscInfoValue">{genresComponent()}</p>
                                 </div>
                                 <div className="miscInfoComponent">
-                                    <p>Developer</p>
-                                    <p>{developersComponent()}</p>
+                                    <p className="miscInfoTitle">Developer</p>
+                                    <p className="miscInfoValue">{developersComponent()}</p>
                                 </div>
                                 <div className="miscInfoComponent">
-                                    <p>Age rating</p>
-                                    <p>{ageRatingComponent()}</p>
+                                    <p className="miscInfoTitle">Age rating</p>
+                                    <p className="miscInfoValue">{ageRatingComponent()}</p>
                                 </div>
                                 <div id="interactionIcons">
                                     <img src={chatIcon} />
