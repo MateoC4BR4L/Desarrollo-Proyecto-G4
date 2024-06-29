@@ -90,7 +90,6 @@ function Catalog() {
                 });
             }
         };
-    
         applyDarkModeClasses();
     }, [darkMode]);    
 
@@ -163,7 +162,8 @@ function Catalog() {
                     <MyButton icon={SearchIcon} title="Last searches" className="bodyMenuOptions" />
                     <MyButton icon={ThumbsUpIcon} title="Best of the year" className="bodyMenuOptions" onClick={e => showGameInfo()}/>
                 </div>
-                <div id="catalogBodyLowerContent">
+                <div id={size === 'small' ? 'catalogBodyLowerContent' : 'catalogBodyLowerContentBig'}>
+                    {/*style={activeButton === 'small' ? catalogBodyLowerContent : catalogBodyLowerContentBig}*/}
                     {loading
                         ? Array.from({ length: 10 }).map((_, index) => (
                             <MySkeletonCard 

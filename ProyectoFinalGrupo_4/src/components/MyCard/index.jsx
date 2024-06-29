@@ -15,14 +15,18 @@ function MyCard({ size, title, released, genres, photo, platforms, id, changeMod
     useEffect(() => {
         const applyDarkModeClasses = () => {
             const cardContainer = document.querySelectorAll('.cardContainer');
+            const cardContainerBig = document.querySelectorAll('.cardContainerBig');
             const cardGameTitle = document.querySelectorAll('.cardGameTitle');
 
             if (darkMode) {
                 cardContainer.forEach(title => {
                     title.classList.add('dark-mode');
                     title.classList.remove('light-mode');
+                })
+                cardContainerBig.forEach(container => {
+                    container.classList.add('dark-mode');
+                    container.classList.remove('light-mode');
                 });
-
                 cardGameTitle.forEach(title => {
                     title.classList.add('dark-mode');
                     title.classList.remove('light-mode');
@@ -31,8 +35,11 @@ function MyCard({ size, title, released, genres, photo, platforms, id, changeMod
                 cardContainer.forEach(title => {
                     title.classList.remove('dark-mode');
                     title.classList.add('light-mode');
-                });
-
+                })
+                cardContainerBig.forEach(title => {
+                    title.classList.remove('dark-mode');
+                    title.classList.add('light-mode');
+                })
                 cardGameTitle.forEach(title => {
                     title.classList.remove('dark-mode');
                     title.classList.add('light-mode');
@@ -87,28 +94,35 @@ function MyCard({ size, title, released, genres, photo, platforms, id, changeMod
         );
     } else if (size === "big") {
         return (
-            <div className="cardContainer">
-                <img className="cardGameDisplay" src={displayPhoto} /> {/* esta info tiene que ser aportada por la api */}
+            <div className="cardContainerBig" id={`gameContainer${id}`} onClick={e => changeModal({showingBoolean: true, showingId: id})}>
+                <img className="cardGameDisplayBig" src={photo} alt={title}/>
                 <div className="cardInnerTitleContainerBig">
-                    <h1 className="cardGameTitle">Game's name over here...</h1>
-                    <h1>#1</h1>
-                    {/* esta info tiene que ser aportada por la api */}
+                    <h1 className="cardGameTitleBig">{title}</h1>
+                    <h1 className="cardGameNumberBig">#1</h1>
                 </div>
                 <div className="cardInnerInfoContainerBig">
                         <div className="cardInnerInfoContainerTextBig">
-                            <p>Release date:    *date*</p>
-                            <p>Genre:    *genre*</p>
-                            <p className="icons"> fokin icons </p>
-                            {/* esta info tiene que ser aportada por la api 
-                            falta el corazoncito en la imagen para darle favorite*/}
+                            <div className="dateBig">
+                                <p id="releaseDate">Release date:</p>
+                                <p id="date">{released}</p>
+                            </div>
+                            <div className="genreBig">
+                                <p id="genre">Genre:</p>
+                                <p id="tags">{genresHandler(genres)}</p>
+                            </div>
+                            <div className="iconsBig">
+                                {renderPlatformIcons()}
+                            </div>
+                            
                         </div>
+                        
                         <div className="cardInnerInfoContainerBodyBig">
-                            <p> Game description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p> 
-                            {/* esta info tien que ser aportada por la api */}
+                           
                         </div>
                 </div>
-            </div>)
-        {/* diseñar la card grande */}
+            </div>
+        )
     }
 }
 export default MyCard;
+
