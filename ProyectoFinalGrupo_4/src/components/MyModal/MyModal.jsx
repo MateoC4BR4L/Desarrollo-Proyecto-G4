@@ -12,6 +12,7 @@ import MyChips from "../MyChips/MyChips";
 import ThumbsUpIcon from "../../assets/Thumbs Up.svg"
 import chatIcon from "../../assets/Chat Bubbles.svg"
 import shareIcon from "../../assets/Action.svg"
+import heartIcon from "../../assets/Heart.svg"
 
 function MyModal({ showingModal, changeModal }){
     const [gameDetails, setGameDetails] = useState([])
@@ -196,10 +197,10 @@ function MyModal({ showingModal, changeModal }){
                         <div id="bottomLeft">
                             <div id="descriptionContainer">
                                 <p>{gameDetails.description_raw}</p>
-                                <MyButton className="transparent" title="Read more" />
+                                <MyButton className="transparent" title="Read more" id={"readMore"} />
                             </div>
                             <div id="buttonsContainer">
-                                <MyButton title="Add to wishlist" className="primaryButton" />
+                                <MyButton title="Add to wishlist" className="primaryButton" icon={heartIcon} />
                                 <MyButton title="Purchase" className="secondaryButton" />
                             </div>
                             <div id="miscInfoContainer">
