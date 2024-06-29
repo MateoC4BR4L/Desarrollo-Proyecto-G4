@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./index.css"; // Assuming you have some styles for the switch
 
-export const MySwitch = () => {
-    const [isChecked, setIsChecked] = useState(false);
+export const MySwitch = ({checked, onChange}) => {
 
     return (
         <div>
@@ -10,8 +9,8 @@ export const MySwitch = () => {
                 <input
                     type="checkbox"
                     id="switch"
-                    checked={isChecked}
-                    onChange={() => setIsChecked(!isChecked)}
+                    checked={checked}
+                    onChange={onChange}
                 />
                 <span className="slider"></span>
             </label>

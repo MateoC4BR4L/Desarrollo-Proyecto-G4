@@ -7,7 +7,19 @@
     border-radius: 12px;
     background: #303030;
     padding-bottom: 15px;
+    transition: background-color 0.5s, color 0.5s; /* Esto es para hacer una transición fluida */
 }
+
+.cardContainer.dark-mode{
+   background: #303030;
+   color: #FFFFFF;
+}
+
+.cardContainer.light-mode{
+    background: #FFFFFF;
+    color: #151515;
+}
+
 .cardInnerTitleContainerSmall{
     display: flex;
     flex-direction: row;
@@ -16,16 +28,19 @@
     margin-left: 10px;
     margin-right: 18px;
 }
+
 .cardInnerInfoContainerSmall{
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
+
 .cardInnerBottomContainerSmall{
    display: flex;
    flex-direction: column;
     /* esto tiene que estar alineado a la izquierda y release date y genre tienen que estar alineados*/
 }
+
 .cardInnerBottomUpperSmall{
     display: flex;
     flex-direction: row;
@@ -38,6 +53,7 @@
     line-height: 18.61px;
     text-align: left;
 }
+
 .cardInnerBottomLowerSmall{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -49,13 +65,16 @@
     line-height: 18.61px;
     text-align: left;
 }
+
 #releaseDate, #genre{
     color: #939393;
     text-align: left;
 }
+
 #tags{
     margin-left: 4px;
 }
+
 .iconsContainer{
     display: flex;
     flex-direction: row;
@@ -70,23 +89,11 @@
     margin-right: 2vw;
     /* esto tiene que estar alineado a la derecha*/
 }
-.cardInnerTitleContainerBig{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left: 5vw;
-    margin-right: 5vw;
-}
-.cardInnerInfoContainerTextBig{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-left: 2vw;
-    margin-right: 2vw;
-}
+
 .icons{
     margin-left: auto;
 }
+
 .cardGameDisplay{
     width: 363px;
     height: 179px;
@@ -104,7 +111,17 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    transition: background-color 0.5s, color 0.5s; /* Esto es para hacer una transición fluida */
 }
+
+.cardGameTitle.dark-mode {
+    color: #FFF;
+}
+
+.cardGameTitle.light-mode {
+    color: #151515;
+}
+
 .cardGameNumber{
     width: 40px;
     height: 20px;
@@ -117,6 +134,7 @@
     font-weight: 700;
     line-height: normal;
 }
+
 #windows{
     width: 16px;
     height: 16px;
@@ -152,4 +170,118 @@
     padding: 1px 0px 1.87px 0px;
     gap: 0px;
     opacity: 0px; 
+}
+
+/*Big Card*/
+
+.cardInnerInfoContainerBodyBig {
+    width: 665px;
+    height: 76px;
+    font-family: Exo;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items:last baseline
+}
+
+.cardInnerInfoContainerTextBig {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Exo;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18.61px;
+    text-align: left;
+    padding: 1px 20px 20px 10px; ;
+}
+
+.cardGameDisplayBig {
+    width: 697px;
+    height: 315px;
+    border-radius: 12px 12px 0 0;
+    object-fit: cover; 
+    margin: 0; 
+    padding: 0;
+}
+
+.cardContainerBig{
+    display: flex;
+    flex-direction: column;
+    width: 697px;
+    height: 538px;
+    border-radius: 12px;
+    background: #303030;
+    /*padding-bottom: 15px;*/
+    transition: background-color 0.5s, color 0.5s; /* Esto es para hacer una transición fluida */
+    overflow: hidden;
+    margin: 0; 
+    padding: 0;
+}
+
+.cardContainerBig.dark-mode{
+    background: #303030;
+    color: #FFFFFF;
+ }
+ 
+.cardContainerBig.light-mode{
+    background: #FFFFFF;
+    color: #151515;
+}
+
+.cardInnerTitleContainerBig{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 700px;
+    height: 33px;
+    font-family: Exo;
+    font-size: 32px;
+    line-height: 42.53px;
+    text-align: left;
+    margin: 20px 10px 0 10px; 
+}
+
+.cardGameTitleBig {
+    font-size: 32px;
+    margin: 10px;
+}
+
+.cardGameNumberBig {
+    font-size: 32px;
+    margin: 40px;
+    color: #36B972;
+}
+
+.dateBig, .genreBig, .iconsBig {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+.dateBig {
+    display: flex;
+    flex-direction: row; 
+    gap: 5px; 
+    padding: 10px;
+}
+
+.genreBig {
+    display: flex;
+    flex-direction: row; 
+    gap: 5px;
+    padding: 10px;
+}
+
+.iconsBig {
+    display: flex;
+    flex-direction: row; 
+    gap: 5px;
+    margin-left: auto;
+    padding: 10px;
 }
