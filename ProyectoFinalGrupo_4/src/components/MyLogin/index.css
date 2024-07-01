@@ -1,0 +1,132 @@
+.login-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    padding-right: 80px;
+}
+
+.login-box{
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.login-box.light-mode {
+    background: #f0f0f0;
+    color: #515151;
+}
+
+.login-box h2 {
+    margin: 0 0 10px;
+}
+
+.login-box p {
+    margin: 10px 0;
+}
+
+.login-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-box input[type="email"],
+.login-box input[type="password"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+}
+
+.login-box .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.login-box button {
+    background: #4caf50;
+    border: none;
+    padding: 10px;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-box button:hover {
+    background: #45a049;
+}
+
+.login-box .social-login {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-box .social-login button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: none;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.login-box .social-login button.light-mode{
+    background: #f0f0f0;
+    color: #36B972;
+    border: 2px solid #36B972;
+}
+
+.login-box .social-login button img {
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.login-box .social-login button:hover {
+    background: #fff;
+    color: #000;
+}
+
+.login-box .facebook {
+    background: #3b5998;
+    border: none;
+}
+
+.login-box .twitter {
+    background: #1da1f2;
+    border: none;
+}
+
+.login-box .google {
+    background: #db4437;
+    border: none;
+}
+
+.generic-color {
+    color: #5FE19B;
+}
+
+.divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.divider p {
+    margin-left: 10px;
+    margin-right: 10px;
+}
