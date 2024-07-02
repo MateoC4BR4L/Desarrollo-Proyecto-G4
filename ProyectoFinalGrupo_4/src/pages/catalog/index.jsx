@@ -20,13 +20,17 @@ import ActiveLight from "../../assets/ActiveLightMode.svg"
 import { MyAvatar } from "../../components/MyAvatar";
 import { MySwitch } from "../../components/MySwitch";
 import MyDropdown from "../../components/MyDropdown/MyDropdown.jsx"
-import { getGames } from "../../../api/api.ts";
+import { getGames, getGamesWithDate } from "../../../api/api.ts";
 import MyModal from "../../components/MyModal/MyModal.jsx";
 import MyLogOut from "../../components/MyLogOut/index.jsx";
 import MySkeletonCard from "../../components/MySkeletonCard/index.jsx";
 
 function Catalog() {
-    const [darkMode, setDarkMode] = useState(true); // Modo oscuro predeterminado
+    const [darkMode, setDarkMode] = useState(() => {
+        const storedDarkMode = localStorage.getItem('darkMode');
+        return storedDarkMode !== null ? JSON.parse(storedDarkMode) : true;
+      });
+
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showingModal, changeModal] = useState({showingBoolean: false, showingId: null})
@@ -34,18 +38,20 @@ function Catalog() {
     const [size, setSize] = useState('small');
     const [activeButton, setActiveButton] = useState('small');
     const navigate = useNavigate();
+    const today = new Date()
+    
 
+    const getGamesPayload = async () => {
+        try {
+            const newGames = await getGames();
+            setGames(newGames);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching games:', error);
+        }
+    };
+    
     useEffect(() => {
-        const getGamesPayload = async () => {
-            try {
-                const newGames = await getGames();
-                setGames(newGames);
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching games:', error);
-            }
-        };
-
         getGamesPayload();
     }, []);
 
@@ -72,6 +78,7 @@ function Catalog() {
                     option.classList.add('dark-mode');
                     option.classList.remove('light-mode');
                 });
+                localStorage.setItem('darkMode', 'true');
             } else {
                 catalogWrapper.classList.remove('dark-mode');
                 catalogWrapper.classList.add('light-mode');
@@ -88,6 +95,7 @@ function Catalog() {
                     option.classList.remove('dark-mode');
                     option.classList.add('light-mode');
                 });
+                localStorage.setItem('darkMode', 'false');
             }
         };
         applyDarkModeClasses();
@@ -115,6 +123,32 @@ function Catalog() {
         setSize('big');
         setActiveButton ('big');
     };
+
+    const getWeeklyGames = async () => {
+        const date1 = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate() - 7).padStart(2, '0')
+        const date2 = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0')
+        setLoading(true)
+        try {
+            const newGames = await getGamesWithDate(date1, date2)
+            setGames(newGames)
+            setLoading(false)
+        } catch (error) {
+            console.error("Error fetching games: ", error)
+        }
+    }
+    
+    const getMontlyGames = async () => {
+        const date1 = today.getFullYear() + "-" + String(today.getMonth()).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0')
+        const date2 = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0')
+        setLoading(true)
+        try {
+            const newGames = await getGamesWithDate(date1, date2)
+            setGames(newGames)
+            setLoading(false)
+        } catch (error) {
+            console.error("Error fetching games: ", error)
+        }
+    }
 
     return (
         <div id="catalogWrapper">
@@ -152,11 +186,11 @@ function Catalog() {
             </div>
             <div id="catalogBodyLower">
                 <div id="catalogBodyLowerMenu">
-                    <MyButton title="Home" className="bodyMenuTitle"/>
+                    <MyButton title="Home" className="bodyMenuTitle" onClick={e => getGamesPayload()}/>
                     <MyButton title="Reviews" className="bodyMenuTitle" />
                     <h3 className="catalogBodyLowerMenuTitle">New Releases</h3> 
-                    <MyButton icon={StarIcon} title="This week" className="bodyMenuOptions" />
-                    <MyButton icon={CalendarIcon} title="This month" className="bodyMenuOptions" />
+                    <MyButton icon={StarIcon} title="This week" className="bodyMenuOptions" onClick={e => getWeeklyGames()} />
+                    <MyButton icon={CalendarIcon} title="This month" className="bodyMenuOptions" onClick={e => getMontlyGames()} />
                     <MyButton icon={ClockIcon} title="Coming soon" className="bodyMenuOptions" />
                     <h3 className="catalogBodyLowerMenuTitle">Popular</h3>
                     <MyButton icon={SearchIcon} title="Last searches" className="bodyMenuOptions" />
@@ -168,7 +202,6 @@ function Catalog() {
                         ? Array.from({ length: 10 }).map((_, index) => (
                             <MySkeletonCard 
                                 key={index} 
-                                darkMode={darkMode} 
                             />
                         ))
                         : games.map((g) => (
@@ -192,4 +225,9 @@ function Catalog() {
         </div>
     )
 }
+
 export default Catalog
+
+export function isDarkModeOn() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
