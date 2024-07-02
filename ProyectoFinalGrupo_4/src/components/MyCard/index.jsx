@@ -74,7 +74,11 @@ function MyCard({ size, title, releaseDate, genres, photo, platforms, id, change
         return (genreGames)
     }
     const hasPlatform = (slug) => {
-        return platforms.some(platform => platform.platform.slug === slug);
+        if (platforms!=null){
+            return platforms.some(platform => platform.platform.slug === slug);
+        } else {
+            return null
+        }
     };
 
     const renderPlatformIcons = () => {

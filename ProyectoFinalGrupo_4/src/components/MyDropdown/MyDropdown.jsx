@@ -4,7 +4,7 @@ import MySearchBar from "../MySearchBar/MySearchBar";
 import { getGames } from "../../../api/api";
 import MyModal from "../MyModal/MyModal"; 
 
-function MyDropdown() {
+function MyDropdown({ id, games }) {
     const [options, setOptions] = useState([]);
     const [filteredOptions, setFilteredOptions] = useState([]);
     const [inputValue, setInputValue] = useState("");
@@ -12,13 +12,8 @@ function MyDropdown() {
     const [showingModal, setShowingModal] = useState({ showingBoolean: false, showingId: null }); // Estado para el modal
 
     useEffect(() => {
-        async function fetchOptions() {
-            const fetchedGames = await getGames();
-            const gameNames = fetchedGames.map(game => ({ id: game.id, name: game.name }));
-            setOptions(gameNames);
-        }
-        fetchOptions();
-    }, []);
+        setOptions(games)
+    }, [games]);
 
     useEffect(() => {
         if (inputValue === "") {
@@ -51,7 +46,7 @@ function MyDropdown() {
     return (
         <>
             {isDropdownVisible && <div className="Overlay" onClick={handleOverlayClick}></div>}
-            <div className="Dropdown">
+            <div className="Dropdown" id={id}>
                 <MySearchBar 
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)} 

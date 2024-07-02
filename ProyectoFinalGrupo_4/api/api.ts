@@ -16,12 +16,12 @@ export const getGames = async () => {
 }
 
 export const getGamesWithDate = async (date1, date2) => {
-  const url = `https://api.rawg.io/api/games?key=990db89b2ae64cecbdceca51022ef2a2&dates=${date1},${date2}&ordering=rating&page_size=30`
+  const url = `https://api.rawg.io/api/games?key=990db89b2ae64cecbdceca51022ef2a2&dates=${date1},${date2}&page_size=30`
   try {
       const response = await fetch(url);
       if (response.ok) {
         const payload = await response.json();
-        console.log(payload.results)
+        console.log(url)
         return payload.results;
       } else {
         console.error("An error happened");
