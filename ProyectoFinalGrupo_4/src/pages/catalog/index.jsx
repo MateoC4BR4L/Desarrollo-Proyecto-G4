@@ -26,7 +26,11 @@ import MyLogOut from "../../components/MyLogOut/index.jsx";
 import MySkeletonCard from "../../components/MySkeletonCard/index.jsx";
 
 function Catalog() {
-    const [darkMode, setDarkMode] = useState(true); // Modo oscuro predeterminado
+    const [darkMode, setDarkMode] = useState(() => {
+        const storedDarkMode = localStorage.getItem('darkMode');
+        return storedDarkMode !== null ? JSON.parse(storedDarkMode) : true;
+      });
+
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showingModal, changeModal] = useState({showingBoolean: false, showingId: null})
@@ -74,6 +78,7 @@ function Catalog() {
                     option.classList.add('dark-mode');
                     option.classList.remove('light-mode');
                 });
+                localStorage.setItem('darkMode', 'true');
             } else {
                 catalogWrapper.classList.remove('dark-mode');
                 catalogWrapper.classList.add('light-mode');
@@ -90,6 +95,7 @@ function Catalog() {
                     option.classList.remove('dark-mode');
                     option.classList.add('light-mode');
                 });
+                localStorage.setItem('darkMode', 'false');
             }
         };
         applyDarkModeClasses();
@@ -196,7 +202,6 @@ function Catalog() {
                         ? Array.from({ length: 10 }).map((_, index) => (
                             <MySkeletonCard 
                                 key={index} 
-                                darkMode={darkMode} 
                             />
                         ))
                         : games.map((g) => (
@@ -220,4 +225,9 @@ function Catalog() {
         </div>
     )
 }
+
 export default Catalog
+
+export function isDarkModeOn() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
