@@ -19,6 +19,7 @@ function MyModal({ showingModal, changeModal }){
     const [gameScreenshots, setGameScreenshots] = useState([])
     const [gameMovies, setGameMovies] = useState([])
     const [loading, setLoading] = useState(true)
+    const [showingFullDescription, setShowingFullDescription] = useState(false)
 
     useEffect(() => {
         const getGameDetails = async () => {
@@ -189,80 +190,106 @@ function MyModal({ showingModal, changeModal }){
         return (gameScreenshots[number] != null)
     }
 
+    const changeDescriptionDisplay = () => {
+        if (!showingFullDescription) {
+            setShowingFullDescription(true)
+        } else {
+            setShowingFullDescription(false)
+        }
+    }
     if (!loading){
-        console.log(gameScreenshots)
-        return(
-            <>
-            <div className="darkBG" onClick={() => changeModal({showingBoolean: false, showingId: null})} />
-            <div className="gameDetailsContainer">
-                <div id="gameImageContainer" style={{ backgroundImage: `url(${gameDetails.background_image})` }}>
-                <div id="gradientOverlay"></div>
-                    <div id="titleComponents">
-                        <MyButton id="crossButton" className="transparent" icon={XIcon} onClick={() => changeModal({showingBoolean: false, showingId: null})}/>
-                        {renderPlatformIcons()}
-                        <h1 id="gameTitle">{gameDetails.name}</h1>
-                        <div id="chipsContainer">
-                            <MyChips /> <MyChips /> <MyChips />
+            return(
+                <>
+                <div className="darkBG" onClick={() => changeModal({showingBoolean: false, showingId: null})} />
+                <div className="gameDetailsContainer">
+                    {!showingFullDescription && (
+                    <div id="gameImageContainer" style={{ backgroundImage: `url(${gameDetails.background_image})` }}>
+                    <div id="gradientOverlay"></div>
+                        <div id="titleComponents">
+                            <MyButton id="crossButton" className="transparent" icon={XIcon} onClick={() => changeModal({showingBoolean: false, showingId: null})}/>
+                            {renderPlatformIcons()}
+                            <h1 id="gameTitle">{gameDetails.name}</h1>
+                            <div id="chipsContainer">
+                                <MyChips /> <MyChips /> <MyChips />
+                            </div>
+                        </div>            
+                            <div id="bottomContainer">
+                                <div id="bottomLeft">
+                                    <div id="descriptionContainer">
+                                        <p>{gameDetails.description_raw}</p>
+                                        <MyButton className="transparent" title="Read more" id={"readMore"} onClick={e => changeDescriptionDisplay()} />
+                                    </div>
+                                    <div id="buttonsContainer">
+                                        <MyButton title="Add to wishlist" className="primaryButton" icon={heartIcon} />
+                                        <MyButton title="Purchase" className="secondaryButton" />
+                                    </div>
+                                    <div id="miscInfoContainer">
+                                        <div className="miscInfoComponent">
+                                            <p className="miscInfoTitle">Platforms</p>
+                                            <p className="miscInfoValue">{platformsComponent()}</p>
+                                        </div>
+                                        <div className="miscInfoComponent">
+                                            <p className="miscInfoTitle">Release date</p>
+                                            <p className="miscInfoValue">{gameDetails.released}</p>
+                                        </div>
+                                        <div className="miscInfoComponent">
+                                            <p className="miscInfoTitle">Publisher</p>
+                                            <p className="miscInfoValue">{publishersComponent()}</p>
+                                        </div>
+                                        <div className="miscInfoComponent">
+                                            <p className="miscInfoTitle">Website</p>
+                                            <p className="miscInfoValue">{gameDetails.website}</p>
+                                        </div>
+                                        <div className="miscInfoComponent">
+                                            <p className="miscInfoTitle">Genre</p>
+                                            <p className="miscInfoValue">{genresComponent()}</p>
+                                        </div>
+                                        <div className="miscInfoComponent">
+                                            <p className="miscInfoTitle">Developer</p>
+                                            <p className="miscInfoValue">{developersComponent()}</p>
+                                        </div>
+                                        <div className="miscInfoComponent">
+                                            <p className="miscInfoTitle">Age rating</p>
+                                            <p className="miscInfoValue">{ageRatingComponent()}</p>
+                                        </div>
+                                        <div id="interactionIcons">
+                                            <img src={chatIcon} />
+                                            <img src={ThumbsUpIcon} />
+                                            <img src={shareIcon} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="bottomRight">
+                                    <div id="mediaContainer">
+                                        {movieComponent()}
+                                        {imagesComponent()}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div id="bottomContainer">
-                        <div id="bottomLeft">
-                            <div id="descriptionContainer">
-                                <p>{gameDetails.description_raw}</p>
-                                <MyButton className="transparent" title="Read more" id={"readMore"} />
-                            </div>
-                            <div id="buttonsContainer">
-                                <MyButton title="Add to wishlist" className="primaryButton" icon={heartIcon} />
-                                <MyButton title="Purchase" className="secondaryButton" />
-                            </div>
-                            <div id="miscInfoContainer">
-                                <div className="miscInfoComponent">
-                                    <p className="miscInfoTitle">Platforms</p>
-                                    <p className="miscInfoValue">{platformsComponent()}</p>
-                                </div>
-                                <div className="miscInfoComponent">
-                                    <p className="miscInfoTitle">Release date</p>
-                                    <p className="miscInfoValue">{gameDetails.released}</p>
-                                </div>
-                                <div className="miscInfoComponent">
-                                    <p className="miscInfoTitle">Publisher</p>
-                                    <p className="miscInfoValue">{publishersComponent()}</p>
-                                </div>
-                                <div className="miscInfoComponent">
-                                    <p className="miscInfoTitle">Website</p>
-                                    <p className="miscInfoValue">{gameDetails.website}</p>
-                                </div>
-                                <div className="miscInfoComponent">
-                                    <p className="miscInfoTitle">Genre</p>
-                                    <p className="miscInfoValue">{genresComponent()}</p>
-                                </div>
-                                <div className="miscInfoComponent">
-                                    <p className="miscInfoTitle">Developer</p>
-                                    <p className="miscInfoValue">{developersComponent()}</p>
-                                </div>
-                                <div className="miscInfoComponent">
-                                    <p className="miscInfoTitle">Age rating</p>
-                                    <p className="miscInfoValue">{ageRatingComponent()}</p>
-                                </div>
-                                <div id="interactionIcons">
-                                    <img src={chatIcon} />
-                                    <img src={ThumbsUpIcon} />
-                                    <img src={shareIcon} />
+                        )}
+                        {showingFullDescription && (
+                            <>
+                            <div id="titleComponents">
+                                <MyButton id="crossButton" className="transparent" icon={XIcon} onClick={() => changeModal({showingBoolean: false, showingId: null})}/>
+                                {renderPlatformIcons()}
+                                <h1 id="gameTitle">{gameDetails.name}</h1>
+                                <div id="chipsContainer">
+                                    <MyChips /> <MyChips /> <MyChips />
                                 </div>
                             </div>
-                        </div>
-                        <div id="bottomRight">
-                            <div id="mediaContainer">
-                                {movieComponent()}
-                                {imagesComponent()}
+                            <div id="bottomContainer">
+                                <div id="descriptionContainerFull">
+                                    <p>{gameDetails.description_raw}</p>
+                                    <MyButton className="transparent" title="Read less" id={"readLess"} onClick={e => changeDescriptionDisplay()} />
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    
+                            </>
+                        )}
+                        
                 </div>
-            </div>
             </>
-        );
+            );
     } else {
         return 
     }

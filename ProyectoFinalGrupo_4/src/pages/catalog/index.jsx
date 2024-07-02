@@ -111,7 +111,7 @@ function Catalog() {
 
     const handleLogout = () => {
         setShowLogout(false);
-        navigate('/login');
+        navigate('/');
     };
 
     const smallCard = () => {
@@ -125,7 +125,9 @@ function Catalog() {
     };
 
     const getWeeklyGames = async () => {
-        const date1 = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate() - 7).padStart(2, '0')
+        const lastWeek = new Date()
+        lastWeek.setDate(today.getDate() - 7)
+        const date1 = lastWeek.getFullYear() + "-" + String(lastWeek.getMonth() + 1).padStart(2, '0') + "-" + String(lastWeek.getDate()).padStart(2, '0')
         const date2 = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0')
         setLoading(true)
         try {
@@ -137,8 +139,10 @@ function Catalog() {
         }
     }
     
-    const getMontlyGames = async () => {
-        const date1 = today.getFullYear() + "-" + String(today.getMonth()).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0')
+    const getMonthlyGames = async () => {
+        const lastMonth = new Date()
+        lastMonth.setMonth(lastMonth.getMonth() - 1)
+        const date1 = lastMonth.getFullYear() + "-" + String(lastMonth.getMonth() + 1).padStart(2, '0') + "-" + String(lastMonth.getDate()).padStart(2, '0')
         const date2 = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0')
         setLoading(true)
         try {
@@ -150,11 +154,39 @@ function Catalog() {
         }
     }
 
+    const getYearlyGames = async () => {
+        const firstOfYear = new Date()
+        firstOfYear.setMonth(1)
+        firstOfYear.setDate(1)
+        const date1 = firstOfYear.getFullYear() + "-" + String(firstOfYear.getMonth()).padStart(2, '0') + "-" + String(firstOfYear.getDate()).padStart(2, '0')
+        const date2 = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0')
+        setLoading(true)
+        try {
+            const newGames = await getGamesWithDate(date1, date2)
+            setGames(newGames)
+            setLoading(false)
+        } catch (error) {
+            console.error("Error fetching games: ", error)
+        }
+    }
+
+    const getComingSoonGames = async () => {
+        const date1 = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0')
+        const date2 = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, '0') + "-" + String(today.getDate()).padStart(2, '0')
+        try {
+            const newGames = await getGamesWithDate(date1, date2);
+            setGames(newGames);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching games:', error);
+        }
+    }
+
     return (
         <div id="catalogWrapper">
             <div id="catalogMenuWrapper">
                 <img id="gameFinderLogo" src={GameFinderLogo}/>
-                <MyDropdown id="searchBar" />
+                <MyDropdown id="searchBar" games={games} />
                 <div id="logOut">
                     <MyButton title="Log out" className={"transparent"} onClick={() => setShowLogout(true)} />
                     <MyAvatar />
@@ -190,11 +222,11 @@ function Catalog() {
                     <MyButton title="Reviews" className="bodyMenuTitle" />
                     <h3 className="catalogBodyLowerMenuTitle">New Releases</h3> 
                     <MyButton icon={StarIcon} title="This week" className="bodyMenuOptions" onClick={e => getWeeklyGames()} />
-                    <MyButton icon={CalendarIcon} title="This month" className="bodyMenuOptions" onClick={e => getMontlyGames()} />
-                    <MyButton icon={ClockIcon} title="Coming soon" className="bodyMenuOptions" />
+                    <MyButton icon={CalendarIcon} title="This month" className="bodyMenuOptions" onClick={e => getMonthlyGames()} />
+                    <MyButton icon={ClockIcon} title="Coming soon" className="bodyMenuOptions" onClick={e => getComingSoonGames()} />
                     <h3 className="catalogBodyLowerMenuTitle">Popular</h3>
                     <MyButton icon={SearchIcon} title="Last searches" className="bodyMenuOptions" />
-                    <MyButton icon={ThumbsUpIcon} title="Best of the year" className="bodyMenuOptions" onClick={e => showGameInfo()}/>
+                    <MyButton icon={ThumbsUpIcon} title="Best of the year" className="bodyMenuOptions" onClick={e => getYearlyGames()}/>
                 </div>
                 <div id={size === 'small' ? 'catalogBodyLowerContent' : 'catalogBodyLowerContentBig'}>
                     {/*style={activeButton === 'small' ? catalogBodyLowerContent : catalogBodyLowerContentBig}*/}

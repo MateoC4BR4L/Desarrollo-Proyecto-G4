@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
 import './index.css';
 import InputField from '../MyInputField';
 import FbDark from '../../assets/FacebookDark.svg';
@@ -11,25 +12,31 @@ import GoogleLight from '../../assets/GoogleLight.svg';
 import { isDarkModeOn } from '../../pages/catalog';
 
 function MyLogin() {
+  
+    const navigate = useNavigate();
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    const loginBox = document.querySelector('.login-box');
+    const socialLoginButtons = document.querySelectorAll('.login-box .social-login button');
+      
     useEffect(() => {
-        const isDarkMode = localStorage.getItem('darkMode') === 'true';
-        const loginBox = document.querySelector('.login-box');
-        const socialLoginButtons = document.querySelectorAll('.login-box .social-login button');
-
-        if (loginBox) {
-          if (!isDarkMode) {
-            loginBox.classList.add('light-mode');
-            socialLoginButtons.forEach(button => {
-              button.classList.add('light-mode');
-            });
-          } else {
-            loginBox.classList.remove('light-mode');
-            socialLoginButtons.forEach(button => {
-              button.classList.remove('light-mode');
-            });
+          if (loginBox) {
+            if (!isDarkMode) {
+              loginBox.classList.add('light-mode');
+              socialLoginButtons.forEach(button => {
+                button.classList.add('light-mode');
+              });
+            } else {
+              loginBox.classList.remove('light-mode');
+              socialLoginButtons.forEach(button => {
+                button.classList.remove('light-mode');
+              });
+            }
           }
-        }
-      }, []);
+        }, []);
+        
+    const handleLogIn = () => {
+      navigate('/catalog');
+    }
 
     return (
         <div className="login-container">
@@ -45,7 +52,7 @@ function MyLogin() {
                 </label>
                 <a className="generic-color" href="/">Forgot password?</a>
             </div>
-            <button type="submit">Log in</button>
+            <button type="submit" onClick={handleLogIn}>Log in</button>
             </form>
             <p>Not registered yet? <a className="generic-color" href="/">Register now</a></p>
             <div className="divider">
