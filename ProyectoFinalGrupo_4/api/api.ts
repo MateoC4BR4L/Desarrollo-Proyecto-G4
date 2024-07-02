@@ -1,17 +1,35 @@
 export const getGames = async () => {
-    const url = "https://api.rawg.io/api/games?key=990db89b2ae64cecbdceca51022ef2a2"
-    try {
-        const response = await fetch(url);
-        if (response.ok) {
-          const payload = await response.json();
-          return payload.results;
-        } else {
-          console.error("An error happened");
-          return [];
-        }
-      } catch (error) {
-        console.error(error);
+  const url = "https://api.rawg.io/api/games?key=990db89b2ae64cecbdceca51022ef2a2&ordering=-metacritic&page_size=30"
+  try {
+      const response = await fetch(url);
+      if (response.ok) {
+        const payload = await response.json();
+        console.log(payload.results)
+        return payload.results;
+      } else {
+        console.error("An error happened");
+        return [];
       }
+    } catch (error) {
+      console.error(error);
+    }
+}
+
+export const getGamesWithDate = async (date1, date2) => {
+  const url = `https://api.rawg.io/api/games?key=990db89b2ae64cecbdceca51022ef2a2&dates=${date1},${date2}&ordering=rating&page_size=30`
+  try {
+      const response = await fetch(url);
+      if (response.ok) {
+        const payload = await response.json();
+        console.log(payload.results)
+        return payload.results;
+      } else {
+        console.error("An error happened");
+        return [];
+      }
+    } catch (error) {
+      console.error(error);
+    }
 }
 
 export const getGameById = async (id) => {
@@ -44,7 +62,6 @@ export const getGameScreenshotsById = async (id) => {
     const response = await fetch(url);
     if (response.ok) {
       const payload = await response.json();
-      console.log(payload)
       return payload;
     } else {
       console.error("An error happened");

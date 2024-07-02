@@ -111,43 +111,55 @@ function MyModal({ showingModal, changeModal }){
     }
 
     const genresComponent = () => {
-        let genresArray = gameDetails.genres
-        let string = ''
-
-        genresArray.forEach(e => {
-            string += e.name + ", "
-        })
-        string = string.slice(0, -2)
-        return string
+        if (gameDetails.genres != null){
+            let genresArray = gameDetails.genres
+            let string = ''
+    
+            genresArray.forEach(e => {
+                string += e.name + ", "
+            })
+            string = string.slice(0, -2)
+            return string
+        } else {
+            return ""
+        }
     }
 
     const developersComponent = () => {
-        let developersArray = gameDetails.developers
-        let string = ''
+        if (gameDetails.developers != null){
+            let developersArray = gameDetails.developers
+            let string = ''
 
-        developersArray.forEach(e => {
-            string += e.name + ", "
-        })
-        string = string.slice(0, -2)
-        return string
+            developersArray.forEach(e => {
+                string += e.name + ", "
+            })
+            string = string.slice(0, -2)
+            return string
+        } else {
+            return ""
+        }
     }
 
     const ageRatingComponent = () => {
-        switch (gameDetails.esrb_rating.id) {
-            case 1:
-                return "Everyone"
-            case 2:
-                return "10+"
-            case 3:
-                return "13+"
-            case 4:
-                return "17+"
-            case 5:
-                return "18+"
-            case 6:
-                return "Pending rating"
-            case 7:
-                return "Pending rating, likely 18+"
+        if (gameDetails.esrb_rating != null) {
+            switch (gameDetails.esrb_rating.id) {
+                case 1:
+                    return "Everyone"
+                case 2:
+                    return "10+"
+                case 3:
+                    return "13+"
+                case 4:
+                    return "17+"
+                case 5:
+                    return "18+"
+                case 6:
+                    return "Pending rating"
+                case 7:
+                    return "Pending rating, likely 18+"
+            }
+        } else {
+            return "Pending rating"
         }
     }
 
