@@ -23,10 +23,7 @@
 .cardInnerTitleContainerSmall{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    margin-left: 10px;
-    margin-right: 18px;
 }
 
 .cardInnerInfoContainerSmall{
@@ -54,17 +51,25 @@
     text-align: left;
 }
 
-.cardInnerBottomLowerSmall{
-    display: grid;
+.cardInnerBottomLowerSmall {
+    display: flex;
     grid-template-columns: repeat(3, 1fr);
     margin-top: -15px;
-    margin-left: 19px;
+    margin-left: 30px;
     font-family: Exo;
     font-size: 14px;
     font-weight: 500;
     line-height: 18.61px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
     text-align: left;
 }
+
+.cardInnerBottomLowerSmall > * {
+    margin-right: 30px; 
+}
+
 
 #releaseDate, #genre{
     color: #939393;
@@ -73,6 +78,7 @@
 
 #tags{
     margin-left: 4px;
+    justify-self: center;
 }
 
 .iconsContainer{
@@ -102,7 +108,7 @@
     /* esto tiene que estar "estirado" */
 }
 .cardGameTitle{
-    width: 293px;
+    width: 290px;
     height: 33px;
     flex-shrink: 0;
     color: #FFF;
@@ -111,7 +117,17 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    text-align: left;
+    margin: 20px 0px 0px 23px;
     transition: background-color 0.5s, color 0.5s; /* Esto es para hacer una transición fluida */
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: flex;
+    text-align: left; 
+    justify-content: flex-start; 
+    display: -webkit-box;
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp: 1; 
 }
 
 .cardGameTitle.dark-mode {
@@ -133,6 +149,8 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    margin: 15px 0px 5px 15px;
+    text-align: left;
 }
 
 #windows{
@@ -180,23 +198,29 @@
     font-family: Exo;
     font-size: 14px;
     font-weight: 500;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items:last baseline
+}
+
+.description {
+    padding: 0px 10px 2px 10px;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp: 4; 
+    line-height: 1.5; 
 }
 
 .cardInnerInfoContainerTextBig {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     font-family: Exo;
     font-size: 14px;
     font-weight: 500;
     line-height: 18.61px;
     text-align: left;
-    padding: 1px 20px 20px 10px; ;
+    padding: 1px; 
 }
 
 .cardGameDisplayBig {
@@ -220,6 +244,7 @@
     overflow: hidden;
     margin: 0; 
     padding: 0;
+    align-items: center;
 }
 
 .cardContainerBig.dark-mode{
@@ -248,12 +273,12 @@
 
 .cardGameTitleBig {
     font-size: 32px;
-    margin: 10px;
+    margin: 10px 0px 5px 27px;
 }
 
 .cardGameNumberBig {
     font-size: 32px;
-    margin: 40px;
+    margin: 10px 25px 5px 0px;
     color: #36B972;
 }
 
@@ -268,14 +293,14 @@
     display: flex;
     flex-direction: row; 
     gap: 5px; 
-    padding: 10px;
+    padding: 10px 5px 5px 10px;
 }
 
 .genreBig {
     display: flex;
     flex-direction: row; 
     gap: 5px;
-    padding: 10px;
+    padding: 10px 5px 5px 10px;
 }
 
 .iconsBig {

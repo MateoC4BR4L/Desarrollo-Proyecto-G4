@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import displayPhoto from "../../assets/biomutantpic0044-810x400.jpg"
+import { getGameById } from "../../../api/api";
 import WINDOWS from "../../assets/WINDOWS.svg"
 import PSN from "../../assets/PSN.svg"
 import XBOX from "../../assets/XBOX.svg"
@@ -10,8 +11,24 @@ import XBOXLIGHT from "../../assets/XBOXLIGHT.svg"
 import SWITCHLIGHT from "../../assets/SWITCHLIGHT.svg"
 import './index.css'
 
-function MyCard({ size, title, released, genres, photo, platforms, id, changeModal, darkMode }) {
-    
+function MyCard({ size, title, releaseDate, genres, photo, platforms, id, changeModal, darkMode }) {
+    const [gameDetails, setGameDetails] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchGameDetails = async () => {
+            try {
+                const data = await getGameById(id);
+                setGameDetails(data);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching game details:', error);
+                setLoading(false);
+            }
+        };
+        fetchGameDetails();
+    }, [id]);
+
     useEffect(() => {
         const applyDarkModeClasses = () => {
             const cardContainer = document.querySelectorAll('.cardContainer');
@@ -71,6 +88,10 @@ function MyCard({ size, title, released, genres, photo, platforms, id, changeMod
         );
     };
 
+     const formattedDate = gameDetails
+        ? new Date(gameDetails.released).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })
+        : 'Loading...';
+
     if (size === "small") {
         return (
             <div className="cardContainer" id={`gameContainer${id}`} onClick={e => changeModal({showingBoolean: true, showingId: id})}>
@@ -82,7 +103,7 @@ function MyCard({ size, title, released, genres, photo, platforms, id, changeMod
                     <div className="cardInnerBottomContainerSmall">
                         <div className="cardInnerBottomUpperSmall">
                             <p id="releaseDate">Release date:</p>
-                            <p id="date">{released}</p>
+                            <p id="date">{formattedDate}</p>
                             {renderPlatformIcons()}
                         </div>
                         <div className="cardInnerBottomLowerSmall">
@@ -104,7 +125,7 @@ function MyCard({ size, title, released, genres, photo, platforms, id, changeMod
                         <div className="cardInnerInfoContainerTextBig">
                             <div className="dateBig">
                                 <p id="releaseDate">Release date:</p>
-                                <p id="date">{released}</p>
+                                <p id="date">{formattedDate}</p>
                             </div>
                             <div className="genreBig">
                                 <p id="genre">Genre:</p>
@@ -113,11 +134,9 @@ function MyCard({ size, title, released, genres, photo, platforms, id, changeMod
                             <div className="iconsBig">
                                 {renderPlatformIcons()}
                             </div>
-                            
                         </div>
-                        
                         <div className="cardInnerInfoContainerBodyBig">
-                           
+                            {loading ? <p>Loading...</p> : <p className="description">{gameDetails.description_raw}</p>}
                         </div>
                 </div>
             </div>
@@ -125,4 +144,3 @@ function MyCard({ size, title, released, genres, photo, platforms, id, changeMod
     }
 }
 export default MyCard;
-

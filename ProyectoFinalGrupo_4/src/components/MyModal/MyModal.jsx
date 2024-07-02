@@ -14,7 +14,7 @@ import chatIcon from "../../assets/Chat Bubbles.svg"
 import shareIcon from "../../assets/Action.svg"
 import heartIcon from "../../assets/Heart.svg"
 
-function MyModal({ showingModal, changeModal }){
+function MyModal({ showingModal, changeModal, darkMode }){
     const [gameDetails, setGameDetails] = useState([])
     const [gameScreenshots, setGameScreenshots] = useState([])
     const [gameMovies, setGameMovies] = useState([])
@@ -68,8 +68,32 @@ function MyModal({ showingModal, changeModal }){
             setLoading(false)
         }
 
-    }, [showingModal.showingId])
+    }, [showingModal.showingId]);
 
+    useEffect(() => {
+        const applyDarkModeClasses = () => {
+            const gameDetailsContainer = document.querySelectorAll('.gameDetailsContainer');
+            const descriptionContainer = document.querySelectorAll('.descriptionContainer');
+            const miscInfoValue = document.querySelectorAll('.miscInfoValue');
+
+            gameDetailsContainer.forEach(container => {
+                container.classList.toggle('dark-mode', darkMode);
+                container.classList.toggle('light-mode', !darkMode);
+            });
+
+            descriptionContainer.forEach(container => {
+                container.classList.toggle('dark-mode', darkMode);
+                container.classList.toggle('light-mode', !darkMode);
+            });
+
+            miscInfoValue.forEach(container => {
+                container.classList.toggle('dark-mode', darkMode);
+                container.classList.toggle('light-mode', !darkMode);
+            });
+        };
+
+        applyDarkModeClasses();
+    }, [darkMode]);
     
     const renderPlatformIcons = () => {
         return (
@@ -191,6 +215,9 @@ function MyModal({ showingModal, changeModal }){
 
     if (!loading){
         console.log(gameScreenshots)
+        const releaseDate = gameDetails.released;
+        const year = new Date(gameDetails.released).getFullYear();
+        const rpgCount = gameDetails.genres.filter(genre => genre.name === "RPG").length;
         return(
             <>
             <div className="darkBG" onClick={() => changeModal({showingBoolean: false, showingId: null})} />
@@ -202,7 +229,7 @@ function MyModal({ showingModal, changeModal }){
                         {renderPlatformIcons()}
                         <h1 id="gameTitle">{gameDetails.name}</h1>
                         <div id="chipsContainer">
-                            <MyChips /> <MyChips /> <MyChips />
+                            <MyChips releaseDate={releaseDate} year={year} rpgCount={rpgCount}/> 
                         </div>
                     </div>
                     <div id="bottomContainer">
@@ -266,7 +293,6 @@ function MyModal({ showingModal, changeModal }){
     } else {
         return 
     }
-    
 };
 
 export default MyModal;
