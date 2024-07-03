@@ -71,30 +71,6 @@ function MyModal({ showingModal, changeModal, darkMode }){
 
     }, [showingModal.showingId]);
 
-    useEffect(() => {
-        const applyDarkModeClasses = () => {
-            const gameDetailsContainer = document.querySelectorAll('.gameDetailsContainer');
-            const descriptionContainer = document.querySelectorAll('.descriptionContainer');
-            const miscInfoValue = document.querySelectorAll('.miscInfoValue');
-
-            gameDetailsContainer.forEach(container => {
-                container.classList.toggle('dark-mode', darkMode);
-                container.classList.toggle('light-mode', !darkMode);
-            });
-
-            descriptionContainer.forEach(container => {
-                container.classList.toggle('dark-mode', darkMode);
-                container.classList.toggle('light-mode', !darkMode);
-            });
-
-            miscInfoValue.forEach(container => {
-                container.classList.toggle('dark-mode', darkMode);
-                container.classList.toggle('light-mode', !darkMode);
-            });
-        };
-
-        applyDarkModeClasses();
-    }, [darkMode]);
     
     const renderPlatformIcons = () => {
         return (

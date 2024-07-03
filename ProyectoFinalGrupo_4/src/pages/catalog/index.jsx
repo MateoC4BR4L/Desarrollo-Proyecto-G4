@@ -252,7 +252,7 @@ function Catalog() {
                         ))}
                 </div>
             </div>
-            {showingModal.showingBoolean && <MyModal showingModal={showingModal} changeModal={changeModal} />}
+            {showingModal.showingBoolean && <MyModal showingModal={showingModal} changeModal={changeModal} darkMode={darkMode}/>}
             {showLogout && <MyLogOut isOpen={showLogout} onClose={() => setShowLogout(false)} onLogout ={handleLogout}/>}
         </div>
     )
