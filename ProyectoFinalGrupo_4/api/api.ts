@@ -1,5 +1,5 @@
 export const getGames = async () => {
-  const url = "https://api.rawg.io/api/games?key=990db89b2ae64cecbdceca51022ef2a2&ordering=-metacritic&page_size=30"
+  const url = "https://api.rawg.io/api/games?key=5ab14b1518de492b8cc6eac52a5c9264&ordering=-metacritic&page_size=30"
   try {
       const response = await fetch(url);
       if (response.ok) {
@@ -16,7 +16,7 @@ export const getGames = async () => {
 }
 
 export const getGamesWithDate = async (date1, date2) => {
-  const url = `https://api.rawg.io/api/games?key=990db89b2ae64cecbdceca51022ef2a2&dates=${date1},${date2}&page_size=30`
+  const url = `https://api.rawg.io/api/games?key=5ab14b1518de492b8cc6eac52a5c9264&dates=${date1},${date2}&page_size=30`
   try {
       const response = await fetch(url);
       if (response.ok) {
@@ -33,7 +33,7 @@ export const getGamesWithDate = async (date1, date2) => {
 }
 
 export const getGameById = async (id) => {
-  const url = `https://api.rawg.io/api/games/${id}?key=990db89b2ae64cecbdceca51022ef2a2`
+  const url = `https://api.rawg.io/api/games/${id}?key=5ab14b1518de492b8cc6eac52a5c9264`
 
   /*
   Access to fetch at 'https://api.rawg.io/api/games/258322' from origin 'http://localhost:5173' has been blocked by CORS 
@@ -56,7 +56,7 @@ export const getGameById = async (id) => {
 }
 
 export const getGameScreenshotsById = async (id) => {
-  const url = `https://api.rawg.io/api/games/${id}/screenshots?key=990db89b2ae64cecbdceca51022ef2a2`
+  const url = `https://api.rawg.io/api/games/${id}/screenshots?key=5ab14b1518de492b8cc6eac52a5c9264`
  
   try {
     const response = await fetch(url);
@@ -73,7 +73,7 @@ export const getGameScreenshotsById = async (id) => {
 }
 
 export const getGameMoviesById = async (id) => {
-  const url = `https://api.rawg.io/api/games/${id}/movies?key=990db89b2ae64cecbdceca51022ef2a2`
+  const url = `https://api.rawg.io/api/games/${id}/movies?key=5ab14b1518de492b8cc6eac52a5c9264`
 
   try {
     const response = await fetch(url);
